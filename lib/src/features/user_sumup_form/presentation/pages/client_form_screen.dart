@@ -16,6 +16,7 @@ class _ClientFormScreenState extends State<ClientFormScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: inkDark,
         leading: IconButton(
             onPressed: () {
               Navigator.of(context).pushNamed('client_counter_screen');

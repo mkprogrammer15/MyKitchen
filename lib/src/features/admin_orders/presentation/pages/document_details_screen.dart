@@ -27,6 +27,7 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: inkDark,
         centerTitle: true,
         title: Text(
           'Anfrage von ${widget.re!.userName}',

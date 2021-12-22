@@ -18,6 +18,7 @@ class LanguageScreen extends StatelessWidget {
         .add(BorderIconEvent(langList: LanguageList.langList));
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: inkDark,
           iconTheme: const IconThemeData(color: corp),
           centerTitle: true,
           title: Text(

@@ -21,6 +21,7 @@ class AdminAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+        backgroundColor: inkDark,
         leading: const BackAppBarButton(),
         centerTitle: true,
         title: Text(

@@ -15,6 +15,7 @@ class _ClientCounterScreenState extends State<ClientCounterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: inkDark,
         centerTitle: true,
         title: Text(
           'BuildMyKitchen',
