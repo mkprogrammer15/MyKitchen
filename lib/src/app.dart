@@ -11,6 +11,8 @@ import 'package:profi_neon/src/features/admin_auth/domain/repositories/auth_repo
 import 'package:profi_neon/src/features/admin_auth/presentation/blocs/bloc/firebase_auth_bloc.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/pages/admin_after_registration_screen.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/pages/admin_login_screen.dart';
+import 'package:profi_neon/src/features/admin_chat/presentation/blocs/bloc/admin_chat_bloc.dart';
+import 'package:profi_neon/src/features/admin_chat/presentation/pages/admin_chat_screen.dart';
 import 'package:profi_neon/src/features/admin_orders/data/repositories/request_repository_impl.dart';
 import 'package:profi_neon/src/features/admin_orders/domain/repositories/request_repository.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/blocs/bloc/requests_bloc.dart';
@@ -48,6 +50,7 @@ class _AppState extends State<App> {
         BlocProvider<RequestsBloc>(
             create: (context) => RequestsBloc(
                 requestRepository: getIt.get<RequestRepository>())),
+        BlocProvider<AdminChatBloc>(create: (context) => AdminChatBloc()),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
@@ -76,9 +79,10 @@ class _AppState extends State<App> {
               AdminLoginScreen.routeName: (context) => AdminLoginScreen(),
               AdminAccountScreen.routeName: (context) => AdminAccountScreen(),
               DocumentDetailsScreen.routeName: (context) =>
-                  DocumentDetailsScreen(),
+                  const DocumentDetailsScreen(),
               AdminAfterRegistrationScreen.routeName: (context) =>
                   AdminAfterRegistrationScreen(),
+              AdminChatScreen.nameRoute: (context) => AdminChatScreen(),
             },
           );
         },

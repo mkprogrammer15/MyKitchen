@@ -24,7 +24,7 @@ class AuthDataSource {
     try {
       final userCredential =
           auth.signInWithEmailAndPassword(email: email, password: password);
-      print('${userCredential.toString()} is logged in');
+      print('${auth.currentUser!.email} is logged in');
       return userCredential;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

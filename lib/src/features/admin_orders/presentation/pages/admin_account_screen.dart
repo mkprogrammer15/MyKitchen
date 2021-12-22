@@ -34,6 +34,21 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
           child: Column(
             children: [
               Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: GestureDetector(
+                  onTap: () =>
+                      Navigator.pushNamed(context, 'admin_chat_screen'),
+                  child: Text(
+                    'Chat',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1!
+                        .copyWith(color: cherry),
+                  ),
+                ),
+              )),
+              Expanded(
                   flex: 1,
                   child: Padding(
                     padding: const EdgeInsets.all(16),

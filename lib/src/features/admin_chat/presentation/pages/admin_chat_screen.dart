@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
+import 'package:profi_neon/src/features/admin_auth/data/data_sources/auth_data_source.dart';
+import 'package:profi_neon/src/features/admin_chat/presentation/blocs/bloc/admin_chat_bloc.dart';
 
 class AdminChatScreen extends StatefulWidget {
   static const nameRoute = 'admin_chat_screen';
@@ -8,54 +12,102 @@ class AdminChatScreen extends StatefulWidget {
 }
 
 class _AdminChatScreenState extends State<AdminChatScreen> {
+  final fireStore = FirebaseFirestore.instance;
+  String messageText = '';
+  String currentUser = AuthDataSource().auth.currentUser!.email.toString();
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<AdminChatBloc>(context)
+        .add(MessageEvent(message: messageText, userEmail: currentUser));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                //Implement logout functionality
-              }),
-        ],
-        title: const Text('Chat'),
-        backgroundColor: Colors.lightBlueAccent,
-      ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              decoration: kMessageContainerDecoration,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) {
-                        //Do something with the user input.
-                      },
-                      decoration: kMessageTextFieldDecoration,
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      //Implement send functionality.
-                    },
-                    child: const Text(
-                      'Send',
-                      style: kSendButtonTextStyle,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+        appBar: AppBar(
+          leading: null,
+          actions: <Widget>[
+            IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () {
+                  //Implement logout functionality
+                }),
           ],
+          title: const Text('Chat'),
+          centerTitle: true,
+          backgroundColor: inkDark,
         ),
-      ),
-    );
+        body: SafeArea(child: BlocBuilder<AdminChatBloc, AdminChatState>(
+            builder: (context, state) {
+          if (state is MessageState) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.chatData.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  '$currentUser :',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .copyWith(fontSize: 18),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  state.chatData[index].message,
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      );
+                    }),
+                Container(
+                  decoration: kMessageContainerDecoration,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          onChanged: (value) {
+                            messageText = value;
+                          },
+                          decoration: kMessageTextFieldDecoration,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          BlocProvider.of<AdminChatBloc>(context).add(
+                              MessageEvent(
+                                  message: messageText, userEmail: 'Michael'));
+                        },
+                        child: const Text(
+                          'Send',
+                          style: kSendButtonTextStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            );
+          } else {
+            return const CircularProgressIndicator();
+          }
+        })));
   }
 }
