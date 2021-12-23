@@ -17,19 +17,26 @@ mixin ChatHelpers {
     });
   }
 
-  static Future<List<ChatEntity>> getChatMessages() async {
-    final qn = await _firebaseFirestore
+  // static Future<List<ChatEntity>> getChatMessages() async {
+  //   final qn = await _firebaseFirestore
+  //       .collection('messages')
+  //       .orderBy(
+  //         'time',
+  //       )
+  //       .get();
+  //   final data = qn.docs;
+  //   final messages = <ChatEntity>[];
+  //   for (final item in data) {
+  //     final message = ChatModel.fromSnapshot(item);
+  //     messages.add(message);
+  //   }
+  //   return messages;
+  // }
+
+  static Stream<QuerySnapshot> get messages {
+    return _firebaseFirestore
         .collection('messages')
-        .orderBy(
-          'time',
-        )
-        .get();
-    final data = qn.docs;
-    final messages = <ChatEntity>[];
-    for (final item in data) {
-      final message = ChatModel.fromSnapshot(item);
-      messages.add(message);
-    }
-    return messages;
+        .orderBy('time')
+        .snapshots();
   }
 }

@@ -10,10 +10,6 @@ abstract class AdminChatState extends Equatable {
 class AdminChatInitial extends AdminChatState {}
 
 class MessageState extends AdminChatState {
-  final List<ChatEntity> chatData;
-
-  const MessageState({required this.chatData});
-
   @override
-  List<Object> get props => [chatData];
+  List<Object> get props => [];
 }
