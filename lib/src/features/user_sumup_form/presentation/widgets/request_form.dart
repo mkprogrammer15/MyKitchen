@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:profi_neon/src/app_localizations.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
@@ -52,6 +56,24 @@ class _RequestFormState extends State<RequestForm> {
     _phoneController.clear();
     _nameController.clear();
     _emailController.clear();
+  }
+
+  File? image;
+
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) {
+        return;
+      } else {
+        setState(() {
+          final imageTemporary = File(image.path);
+          this.image = imageTemporary;
+        });
+      }
+    } on PlatformException catch (e) {
+      print('Failed to pick the image: $e');
+    }
   }
 
   @override
@@ -135,6 +157,53 @@ class _RequestFormState extends State<RequestForm> {
                     .getTranslatedValues('Wählen Sie Ihr Wunschtermin'),
                 style: Theme.of(context).textTheme.headline4,
               )),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Haben Sie für uns Fotos der Küche?',
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => pickImage(ImageSource.camera),
+                  style: ElevatedButton.styleFrom(primary: inkDark),
+                  child: const Icon(
+                    Icons.camera_alt_outlined,
+                    color: corp,
+                  ),
+                ),
+              ),
+              const Expanded(
+                child: SizedBox(
+                  height: 5,
+                ),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => pickImage(ImageSource.gallery),
+                  style: ElevatedButton.styleFrom(primary: inkDark),
+                  child: const Icon(
+                    Icons.image_outlined,
+                    color: corp,
+                  ),
+                ),
+              )
+            ],
+          ),
+          Container(
+            height: 150,
+            width: double.infinity,
+            child: image != null
+                ? Image.file(
+                    image!,
+                    width: 160,
+                    height: 160,
+                  )
+                : const FlutterLogo(),
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(primary: inkDark),
             onPressed: () {
