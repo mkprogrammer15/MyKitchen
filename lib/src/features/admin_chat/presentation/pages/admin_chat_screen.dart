@@ -16,6 +16,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
   final fireStore = FirebaseFirestore.instance;
   String messageText = '';
   String currentUser = AuthDataSource().auth.currentUser!.email!.toString();
+  final messageController = TextEditingController();
 
   @override
   void initState() {
@@ -53,6 +54,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
                   children: <Widget>[
                     Expanded(
                       child: TextField(
+                        controller: messageController,
                         onChanged: (value) {
                           messageText = value;
                         },
@@ -64,6 +66,8 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
                         BlocProvider.of<AdminChatBloc>(context).add(
                             MessageEvent(
                                 message: messageText, userEmail: currentUser));
+
+                        messageController.clear();
                       },
                       child: const Text(
                         'Send',

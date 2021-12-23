@@ -1,23 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
   const MessageBubble(
-      {required this.sender, required this.text, required this.isMe});
+      {required this.sender,
+      required this.text,
+      required this.isMe,
+      required this.time});
 
   final String sender;
   final String text;
   final bool isMe;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            sender,
+            '$sender, 9:54',
             style: const TextStyle(
               fontSize: 12,
               color: Colors.black54,

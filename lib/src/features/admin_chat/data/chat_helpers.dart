@@ -13,7 +13,7 @@ mixin ChatHelpers {
     await _firebaseFirestore.collection('messages').add(<String, dynamic>{
       'text': messageText,
       'sender': currentUser,
-      'time': Timestamp.now()
+      'time': Timestamp.now().toDate()
     });
   }
 

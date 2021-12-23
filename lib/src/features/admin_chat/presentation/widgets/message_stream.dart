@@ -18,16 +18,19 @@ class MessagesStream extends StatelessWidget {
           );
         }
         final messages = snapshot.data!.docs.reversed;
+        // ignore: prefer_final_locals
         List<Widget> messageBubbles = <MessageBubble>[];
         for (final message in messages) {
           final messageText = message['text'].toString();
           final messageSender = message['sender'].toString();
+          final time = message['time'].toString();
 
           final currentUser =
-              AuthDataSource().auth.currentUser!.email!.substring(0, 5);
+              AuthDataSource().auth.currentUser!.email!.toString();
 
           final messageBubble = MessageBubble(
-            sender: messageSender.toString(),
+            time: time,
+            sender: messageSender,
             text: messageText,
             isMe: currentUser == messageSender,
           );
