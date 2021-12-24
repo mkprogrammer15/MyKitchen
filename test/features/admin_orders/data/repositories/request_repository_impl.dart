@@ -9,6 +9,7 @@ class MockFirebaseOrders extends Mock implements RequestDataSource {}
 
 final resultList = <RequestEntity>[
   RequestEntity(
+      imageUrl: 'fakeUrl',
       userName: 'FakeName1',
       phone: 'FakePhone1',
       address: '',
@@ -27,6 +28,7 @@ final resultList = <RequestEntity>[
       totalPrice: 'totalPrice',
       adminComment: 'adminComment'),
   RequestEntity(
+      imageUrl: 'fakeUrl',
       userName: 'FakeName2',
       phone: 'FakePhone2',
       address: 'address',

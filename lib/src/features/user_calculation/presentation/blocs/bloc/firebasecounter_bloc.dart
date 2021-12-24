@@ -66,6 +66,7 @@ class FirebaseCounterBloc
       final _userComment = event.userComment;
       final _userEmail = event.userEmail;
       final _userAddress = event.userAddress;
+      final _imageUrl = event.imageUrl;
 
       final currentDate = DateTime.now();
       final formattedDate =
@@ -88,11 +89,14 @@ class FirebaseCounterBloc
         'Comment user': _userComment,
         'Installation Date': _installationDate,
         'Küchenlänge': '$kitchenSize',
+        'Bild Küche': '$_imageUrl',
         'Total price': '$totalKitchenPrice €',
         'Administrator Anmerkung': ''
       };
 
-      _totalData..addAll(data)..addAll(_partNamesAndStatus);
+      _totalData
+        ..addAll(data)
+        ..addAll(_partNamesAndStatus);
 
       await FirebaseFirestore.instance
           .collection('Requests')
@@ -107,7 +111,8 @@ class FirebaseCounterBloc
           userAddress: _userAddress,
           userComment: _userComment,
           userEmail: _userEmail,
-          userPhone: _userPhone);
+          userPhone: _userPhone,
+          imageUrl: _imageUrl);
     }
   }
 }

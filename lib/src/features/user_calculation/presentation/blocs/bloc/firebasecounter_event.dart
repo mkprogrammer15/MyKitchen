@@ -10,7 +10,8 @@ abstract class FirebasecounterEvent extends Equatable {
 class ZeroFirebaseEvent extends FirebasecounterEvent {
   final List<PartOfKitchen> partsOfKitchenList;
   final double? totalKitchenPrice;
-  ZeroFirebaseEvent({required this.partsOfKitchenList, this.totalKitchenPrice});
+  const ZeroFirebaseEvent(
+      {required this.partsOfKitchenList, this.totalKitchenPrice});
 
   @override
   List<Object> get props => [];
@@ -19,7 +20,7 @@ class ZeroFirebaseEvent extends FirebasecounterEvent {
 class FirstFirebaseEvent extends FirebasecounterEvent {
   final List<PartOfKitchen> partsOfKitchenList;
   final double kitchenSize;
-  FirstFirebaseEvent(
+  const FirstFirebaseEvent(
       {required this.partsOfKitchenList, required this.kitchenSize});
 
   @override
@@ -35,6 +36,7 @@ class SecondFirebaseEvent extends FirebasecounterEvent {
   String? userAddress;
   String? userComment;
   String? installationDate;
+  String? imageUrl;
 
   SecondFirebaseEvent(
       {required this.partsOfKitchenList,
@@ -44,7 +46,8 @@ class SecondFirebaseEvent extends FirebasecounterEvent {
       this.userComment,
       this.userEmail,
       this.userName,
-      this.userPhone});
+      this.userPhone,
+      this.imageUrl});
 
   @override
   List<Object> get props => [];

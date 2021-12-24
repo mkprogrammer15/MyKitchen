@@ -36,6 +36,7 @@ class DataFirebaseState extends FirebasecounterState {
   String? userAddress;
   String? userComment;
   String? installationDate;
+  String? imageUrl;
 
   DataFirebaseState(
       {required this.partOfKitchenList,
@@ -45,7 +46,19 @@ class DataFirebaseState extends FirebasecounterState {
       this.userComment,
       this.userEmail,
       this.userName,
-      this.userPhone});
+      this.userPhone,
+      this.imageUrl});
 
-  List<Object> get props => [];
+  @override
+  List<Object> get props => [
+        partOfKitchenList,
+        totalKitchenPrice!,
+        userAddress!,
+        userComment!,
+        userEmail!,
+        userName!,
+        userPhone!,
+        installationDate!,
+        imageUrl!
+      ];
 }

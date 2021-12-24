@@ -16,6 +16,7 @@ class RequestEntity {
   final String email;
   final String totalPrice;
   final String adminComment;
+  final String imageUrl;
 
   RequestEntity(
       {required this.userName,
@@ -34,5 +35,6 @@ class RequestEntity {
       required this.requestDate,
       required this.email,
       required this.totalPrice,
-      required this.adminComment});
+      required this.adminComment,
+      required this.imageUrl});
 }

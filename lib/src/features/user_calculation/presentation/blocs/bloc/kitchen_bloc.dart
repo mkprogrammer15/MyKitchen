@@ -24,7 +24,7 @@ class KitchenBloc extends Bloc<KitchenEvent, KitchenState> {
       yield KitchenMain(partsOfKitchenList!);
     }
     if (event is SecondKitchenEvent) {
-      for (int i = 0; i < partsOfKitchenList!.length; i++) {
+      for (var i = 0; i < partsOfKitchenList!.length; i++) {
         partsOfKitchenList![i].isActive = false;
       }
       yield KitchenMain(partsOfKitchenList!);

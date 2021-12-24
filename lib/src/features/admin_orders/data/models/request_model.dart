@@ -19,7 +19,8 @@ class RequestModel extends RequestEntity {
       required String requestDate,
       required String email,
       required String totalPrice,
-      required String adminComment})
+      required String adminComment,
+      required String imageUrl})
       : super(
             address: address,
             clientComment: clientComment,
@@ -37,28 +38,30 @@ class RequestModel extends RequestEntity {
             requestDate: requestDate,
             email: email,
             totalPrice: totalPrice,
-            adminComment: adminComment);
+            adminComment: adminComment,
+            imageUrl: imageUrl);
 
   factory RequestModel.fromSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snap) {
     final requestModel = RequestModel(
-        userName: snap['Name'].toString(),
-        requestDate: snap['Anfrage vom'].toString(),
-        address: snap['Address'].toString(),
-        clientComment: snap['Comment user'].toString(),
-        email: snap['Email'].toString(),
-        gebraucht: snap['Gebrauchte Küche'] as bool,
-        haenge: snap['Hängeschränke'] as bool,
-        herd: snap['Herd'] as bool,
-        platte: snap['Arbeitsplatte schneiden'] as bool,
-        waschmaschine: snap['Waschmaschine'] as bool,
-        spuelmaschine: snap['Spülmaschine'] as bool,
-        phone: snap['Phone'].toString(),
-        kitchenSize: snap['Küchenlänge'].toString(),
-        documentID: snap['Document ID'].toString(),
-        installationDate: snap['Installation Date'].toString(),
-        totalPrice: snap['Total price'].toString(),
-        adminComment: snap['Administrator Anmerkung'].toString());
+        imageUrl: snap.data()['Bild Küche'].toString(),
+        userName: snap.data()['Name'].toString(),
+        requestDate: snap.data()['Anfrage vom'].toString(),
+        address: snap.data()['Address'].toString(),
+        clientComment: snap.data()['Comment user'].toString(),
+        email: snap.data()['Email'].toString(),
+        gebraucht: snap.data()['Gebrauchte Küche'] as bool,
+        haenge: snap.data()['Hängeschränke'] as bool,
+        herd: snap.data()['Herd'] as bool,
+        platte: snap.data()['Arbeitsplatte schneiden'] as bool,
+        waschmaschine: snap.data()['Waschmaschine'] as bool,
+        spuelmaschine: snap.data()['Spülmaschine'] as bool,
+        phone: snap.data()['Phone'].toString(),
+        kitchenSize: snap.data()['Küchenlänge'].toString(),
+        documentID: snap.data()['Document ID'].toString(),
+        installationDate: snap.data()['Installation Date'].toString(),
+        totalPrice: snap.data()['Total price'].toString(),
+        adminComment: snap.data()['Administrator Anmerkung'].toString());
 
     return requestModel;
   }

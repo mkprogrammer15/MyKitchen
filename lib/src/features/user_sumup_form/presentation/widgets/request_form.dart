@@ -82,6 +82,7 @@ class _RequestFormState extends State<RequestForm> {
 
   late final String fileName;
   late Reference firebaseStorageRef;
+  String imageDownloadUrl = '';
 
   Future updloadImageToFirebase(BuildContext context) async {
     fileName = basename(image!.path);
@@ -89,9 +90,8 @@ class _RequestFormState extends State<RequestForm> {
         FirebaseStorage.instance.ref().child('uploads/$fileName');
     final uploadTask = firebaseStorageRef.putFile(image!);
     final taskSnapshot = await uploadTask;
-    await taskSnapshot.ref
-        .getDownloadURL()
-        .then((value) => print('Done $value'));
+    imageDownloadUrl =
+        await taskSnapshot.ref.getDownloadURL().then((value) => value);
   }
 
   @override
@@ -224,8 +224,8 @@ class _RequestFormState extends State<RequestForm> {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(primary: inkDark),
-            onPressed: () {
-              updloadImageToFirebase(context);
+            onPressed: () async {
+              await updloadImageToFirebase(context);
               BlocProvider.of<FirebaseCounterBloc>(context).add(
                   SecondFirebaseEvent(
                       partsOfKitchenList: PartOfKitchen.getList(),
@@ -234,7 +234,8 @@ class _RequestFormState extends State<RequestForm> {
                       userComment: _commentController.text,
                       userEmail: _emailController.text,
                       userName: _nameController.text,
-                      userPhone: _phoneController.text));
+                      userPhone: _phoneController.text,
+                      imageUrl: imageDownloadUrl));
 
               Navigator.of(context).pushNamed('after_request_screen');
             },
