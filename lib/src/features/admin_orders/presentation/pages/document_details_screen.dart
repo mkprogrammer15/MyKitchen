@@ -83,6 +83,13 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
                           widget10: widget),
                     ),
                   ),
+                  SizedBox(
+                    height: 200,
+                    width: 450,
+                    child: widget.re!.imageUrl.isNotEmpty
+                        ? Image.network(widget.re!.imageUrl.toString())
+                        : null,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8),
                     child: Text(

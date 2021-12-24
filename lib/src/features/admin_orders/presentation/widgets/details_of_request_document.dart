@@ -32,7 +32,7 @@ class DetailsOfRequestDocument extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 400,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -104,7 +104,7 @@ class DetailsOfRequestDocument extends StatelessWidget {
                 .textTheme
                 .headline1!
                 .copyWith(color: corpBrighter),
-          )
+          ),
         ],
       ),
     );

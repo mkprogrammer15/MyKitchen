@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -237,7 +236,7 @@ class _RequestFormState extends State<RequestForm> {
                       userPhone: _phoneController.text,
                       imageUrl: imageDownloadUrl));
 
-              Navigator.of(context).pushNamed('after_request_screen');
+              await Navigator.of(context).pushNamed('after_request_screen');
             },
             child: Text(
                 AppLocalization.of(context)!
