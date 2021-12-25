@@ -79,13 +79,12 @@ class _RequestFormState extends State<RequestForm> {
     }
   }
 
-  late final String fileName;
-  late Reference firebaseStorageRef;
   String imageDownloadUrl = '';
+  bool loadingToSendRequest = false;
 
   Future updloadImageToFirebase(BuildContext context) async {
-    fileName = basename(image!.path);
-    firebaseStorageRef =
+    final fileName = basename(image!.path);
+    final firebaseStorageRef =
         FirebaseStorage.instance.ref().child('uploads/$fileName');
     final uploadTask = firebaseStorageRef.putFile(image!);
     final taskSnapshot = await uploadTask;
@@ -221,28 +220,34 @@ class _RequestFormState extends State<RequestForm> {
                   )
                 : const FlutterLogo(),
           ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(primary: inkDark),
-            onPressed: () async {
-              await updloadImageToFirebase(context);
-              BlocProvider.of<FirebaseCounterBloc>(context).add(
-                  SecondFirebaseEvent(
-                      partsOfKitchenList: PartOfKitchen.getList(),
-                      installationDate: dateText,
-                      userAddress: _addressController.text,
-                      userComment: _commentController.text,
-                      userEmail: _emailController.text,
-                      userName: _nameController.text,
-                      userPhone: _phoneController.text,
-                      imageUrl: imageDownloadUrl));
+          loadingToSendRequest == false
+              ? ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: inkDark),
+                  onPressed: () async {
+                    setState(() {
+                      loadingToSendRequest = true;
+                    });
+                    await updloadImageToFirebase(context);
+                    BlocProvider.of<FirebaseCounterBloc>(context).add(
+                        SecondFirebaseEvent(
+                            partsOfKitchenList: PartOfKitchen.getList(),
+                            installationDate: dateText,
+                            userAddress: _addressController.text,
+                            userComment: _commentController.text,
+                            userEmail: _emailController.text,
+                            userName: _nameController.text,
+                            userPhone: _phoneController.text,
+                            imageUrl: imageDownloadUrl));
 
-              await Navigator.of(context).pushNamed('after_request_screen');
-            },
-            child: Text(
-                AppLocalization.of(context)!
-                    .getTranslatedValues('Anfrage abschicken'),
-                style: Theme.of(context).textTheme.headline4),
-          ),
+                    await Navigator.of(context)
+                        .pushNamed('after_request_screen');
+                  },
+                  child: Text(
+                      AppLocalization.of(context)!
+                          .getTranslatedValues('Anfrage abschicken'),
+                      style: Theme.of(context).textTheme.headline4),
+                )
+              : const CircularProgressIndicator(),
         ]),
       ),
     );
