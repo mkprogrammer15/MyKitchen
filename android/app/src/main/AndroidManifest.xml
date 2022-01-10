@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.profi_neon">
    <application
-        android:label="profi_neon"
+        android:label="MyKitchen"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
