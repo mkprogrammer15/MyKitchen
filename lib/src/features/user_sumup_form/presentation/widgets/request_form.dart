@@ -83,6 +83,9 @@ class _RequestFormState extends State<RequestForm> {
   bool loadingToSendRequest = false;
 
   Future updloadImageToFirebase(BuildContext context) async {
+    if (image == null) {
+      return;
+    }
     final fileName = basename(image!.path);
     final firebaseStorageRef =
         FirebaseStorage.instance.ref().child('uploads/$fileName');
@@ -176,49 +179,60 @@ class _RequestFormState extends State<RequestForm> {
           const SizedBox(
             height: 10,
           ),
+          const Divider(
+            thickness: 1,
+            color: blueyGrey,
+          ),
           Text(
             'Haben Sie für uns Fotos der Küche?',
             style: Theme.of(context).textTheme.headline3,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () => pickImage(ImageSource.camera),
-                  style: ElevatedButton.styleFrom(primary: inkDark),
-                  child: const Icon(
-                    Icons.camera_alt_outlined,
-                    color: corp,
+          Padding(
+            padding: const EdgeInsets.only(left: 35, right: 35),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => pickImage(ImageSource.camera),
+                    style: ElevatedButton.styleFrom(primary: inkDark),
+                    child: const Icon(
+                      Icons.camera_alt_outlined,
+                      color: corp,
+                    ),
                   ),
                 ),
-              ),
-              const Expanded(
-                child: SizedBox(
-                  height: 5,
-                ),
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () => pickImage(ImageSource.gallery),
-                  style: ElevatedButton.styleFrom(primary: inkDark),
-                  child: const Icon(
-                    Icons.image_outlined,
-                    color: corp,
+                const Expanded(
+                  child: SizedBox(
+                    height: 5,
                   ),
                 ),
-              )
-            ],
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => pickImage(ImageSource.gallery),
+                    style: ElevatedButton.styleFrom(primary: inkDark),
+                    child: const Icon(
+                      Icons.image_outlined,
+                      color: corp,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-          SizedBox(
-            height: 150,
-            width: double.infinity,
-            child: image != null
-                ? Image.file(
-                    image!,
-                    width: 160,
-                    height: 160,
-                  )
-                : const FlutterLogo(),
+          Padding(
+            padding: const EdgeInsets.only(left: 35, right: 35),
+            child: Container(
+              decoration: BoxDecoration(border: Border.all(color: blueyGrey)),
+              height: 150,
+              width: double.infinity,
+              child: image != null
+                  ? Image.file(
+                      image!,
+                      width: 160,
+                      height: 160,
+                    )
+                  : const FlutterLogo(),
+            ),
           ),
           loadingToSendRequest == false
               ? ElevatedButton(
