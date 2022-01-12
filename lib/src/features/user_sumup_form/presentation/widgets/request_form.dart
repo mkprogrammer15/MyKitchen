@@ -10,6 +10,8 @@ import 'package:profi_neon/src/app_localizations.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
 import 'package:profi_neon/src/features/user_calculation/data/models/part_of_kitchen.dart';
 import 'package:profi_neon/src/features/user_calculation/presentation/blocs/bloc/firebasecounter_bloc.dart';
+import 'package:profi_neon/src/features/user_sumup_form/presentation/widgets/image_picker_widget.dart';
+import 'package:profi_neon/src/features/user_sumup_form/presentation/widgets/user_form_inputs.dart';
 import 'package:validators/validators.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -103,65 +105,12 @@ class _RequestFormState extends State<RequestForm> {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         key: _formKey,
         child: Column(children: [
-          Text(
-            AppLocalization.of(context)!
-                .getTranslatedValues('Wie können wir Sie erreichen?'),
-            style: Theme.of(context)
-                .textTheme
-                .headline1
-                ?.copyWith(fontSize: 20, color: corpDarker),
-          ),
-          TextFormField(
-            controller: _nameController,
-            decoration: InputDecoration(
-                hintText:
-                    AppLocalization.of(context)!.getTranslatedValues('Name'),
-                labelText: AppLocalization.of(context)!
-                    .getTranslatedValues('Ihr Name'),
-                suffixIcon: const Icon(Icons.person)),
-          ),
-          TextFormField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                suffixIcon: const Icon(Icons.mail),
-                hintText: 'email@example.com',
-                labelText: AppLocalization.of(context)!
-                    .getTranslatedValues('Ihre Email'),
-              ),
-              keyboardType: TextInputType.emailAddress,
-              validator: (dynamic value) =>
-                  !isEmail(value! as String) ? 'Invalid Email' : null),
-          TextFormField(
-            keyboardType: TextInputType.phone,
-            controller: _phoneController,
-            decoration: InputDecoration(
-                suffixIcon: const Icon(Icons.phone),
-                hintText: AppLocalization.of(context)!
-                    .getTranslatedValues('Telefonnummer'),
-                labelText: AppLocalization.of(context)!
-                    .getTranslatedValues('Ihre Telefonnummer')),
-          ),
-          TextFormField(
-            controller: _addressController,
-            decoration: InputDecoration(
-                suffixIcon: const Icon(Icons.home),
-                hintText: AppLocalization.of(context)!
-                    .getTranslatedValues('Anschrift'),
-                labelText: AppLocalization.of(context)!
-                    .getTranslatedValues('Ihre Adresse')),
-          ),
-          TextFormField(
-            maxLines: 3,
-            maxLength: 200,
-            decoration: InputDecoration(
-              suffixIcon: const Icon(Icons.comment),
-              hintText:
-                  AppLocalization.of(context)!.getTranslatedValues('Kommentar'),
-              labelText: AppLocalization.of(context)!
-                  .getTranslatedValues('Ihr Kommentar'),
-            ),
-            controller: _commentController,
-          ),
+          UserFormInputs(
+              nameController: _nameController,
+              emailController: _emailController,
+              phoneController: _phoneController,
+              addressController: _addressController,
+              commentController: _commentController),
           Text(
             dateText == 'Terminwunsch'
                 ? AppLocalization.of(context)!.getTranslatedValues(dateText)
@@ -217,78 +166,6 @@ class _RequestFormState extends State<RequestForm> {
               : const CircularProgressIndicator(),
         ]),
       ),
-    );
-  }
-}
-
-class ImagePickerWidget extends StatelessWidget {
-  const ImagePickerWidget({
-    Key? key,
-    required this.image,
-    required this.pickImageFromCamera,
-    required this.pickImageFromGallery,
-  }) : super(key: key);
-
-  final File? image;
-  final VoidCallback pickImageFromGallery;
-  final VoidCallback pickImageFromCamera;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Haben Sie für uns Fotos der Küche?',
-          style: Theme.of(context).textTheme.headline3,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 35, right: 35),
-          child: Row(
-            children: [
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: pickImageFromCamera,
-                  style: ElevatedButton.styleFrom(primary: inkDark),
-                  child: const Icon(
-                    Icons.camera_alt_outlined,
-                    color: corp,
-                  ),
-                ),
-              ),
-              const Expanded(
-                child: SizedBox(
-                  height: 5,
-                ),
-              ),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: pickImageFromGallery,
-                  style: ElevatedButton.styleFrom(primary: inkDark),
-                  child: const Icon(
-                    Icons.image_outlined,
-                    color: corp,
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 35, right: 35),
-          child: Container(
-            decoration: BoxDecoration(border: Border.all(color: blueyGrey)),
-            height: 150,
-            width: double.infinity,
-            child: image != null
-                ? Image.file(
-                    image!,
-                    width: 160,
-                    height: 160,
-                  )
-                : const FlutterLogo(),
-          ),
-        ),
-      ],
     );
   }
 }
