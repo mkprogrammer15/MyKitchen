@@ -95,6 +95,8 @@ class _RequestFormState extends State<RequestForm> {
         await taskSnapshot.ref.getDownloadURL().then((value) => value);
   }
 
+  bool isWidgetVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -130,10 +132,22 @@ class _RequestFormState extends State<RequestForm> {
             thickness: 1,
             color: blueyGrey,
           ),
-          ImagePickerWidget(
-              image: image,
-              pickImageFromCamera: () => pickImage(ImageSource.camera),
-              pickImageFromGallery: () => pickImage(ImageSource.gallery)),
+          IconButton(
+              onPressed: () => setState(() {
+                    isWidgetVisible = !isWidgetVisible;
+                  }),
+              icon: const Icon(
+                Icons.camera_alt_rounded,
+                size: 30,
+                color: corpDarker,
+              )),
+          Visibility(
+            visible: isWidgetVisible,
+            child: ImagePickerWidget(
+                image: image,
+                pickImageFromCamera: () => pickImage(ImageSource.camera),
+                pickImageFromGallery: () => pickImage(ImageSource.gallery)),
+          ),
           loadingToSendRequest == false
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: inkDark),
