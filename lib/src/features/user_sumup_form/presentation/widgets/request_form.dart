@@ -1,17 +1,13 @@
-import 'dart:io';
-
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:path/path.dart';
 import 'package:profi_neon/src/app_localizations.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
 import 'package:profi_neon/src/features/user_calculation/data/models/part_of_kitchen.dart';
 import 'package:profi_neon/src/features/user_calculation/presentation/blocs/bloc/firebasecounter_bloc.dart';
+import 'package:profi_neon/src/features/user_sumup_form/image_data_service/image_data_service.dart';
 import 'package:profi_neon/src/features/user_sumup_form/presentation/widgets/image_picker_widget.dart';
 import 'package:profi_neon/src/features/user_sumup_form/presentation/widgets/user_form_inputs.dart';
 
@@ -20,7 +16,7 @@ class RequestForm extends StatefulWidget {
   _RequestFormState createState() => _RequestFormState();
 }
 
-class _RequestFormState extends State<RequestForm> {
+class _RequestFormState extends State<RequestForm> with ImageDataService {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
@@ -61,40 +57,7 @@ class _RequestFormState extends State<RequestForm> {
     _emailController.clear();
   }
 
-  File? image;
-
-  Future pickImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) {
-        return;
-      } else {
-        setState(() {
-          final imageTemporary = File(image.path);
-          this.image = imageTemporary;
-        });
-      }
-    } on PlatformException catch (e) {
-      print('Failed to pick the image: $e');
-    }
-  }
-
-  String imageDownloadUrl = '';
   bool loadingToSendRequest = false;
-
-  Future updloadImageToFirebase(BuildContext context) async {
-    if (image == null) {
-      return;
-    }
-    final fileName = basename(image!.path);
-    final firebaseStorageRef =
-        FirebaseStorage.instance.ref().child('uploads/$fileName');
-    final uploadTask = firebaseStorageRef.putFile(image!);
-    final taskSnapshot = await uploadTask;
-    imageDownloadUrl =
-        await taskSnapshot.ref.getDownloadURL().then((value) => value);
-  }
-
   bool isWidgetVisible = false;
 
   @override
@@ -144,7 +107,7 @@ class _RequestFormState extends State<RequestForm> {
           Visibility(
             visible: isWidgetVisible,
             child: ImagePickerWidget(
-                image: image,
+                image: thisImage,
                 pickImageFromCamera: () => pickImage(ImageSource.camera),
                 pickImageFromGallery: () => pickImage(ImageSource.gallery)),
           ),
