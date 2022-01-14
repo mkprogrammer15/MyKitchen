@@ -8,28 +8,29 @@ abstract class FirebaseAuthEvent extends Equatable {
 }
 
 class SignInEvent extends FirebaseAuthEvent {
-  String email;
-  String password;
-  SignInEvent({
+  final String email;
+  final String password;
+
+  const SignInEvent({
     required this.email,
     required this.password,
   });
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [email, password];
 }
 
 class RegisterEvent extends FirebaseAuthEvent {
-  String email;
-  String password;
-  String name;
-  RegisterEvent({
+  final String email;
+  final String password;
+  final String name;
+  const RegisterEvent({
     required this.email,
     required this.password,
     required this.name,
   });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [email, password, name];
 }
 
 class SignOutEvent extends FirebaseAuthEvent {

@@ -40,29 +40,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 300,
-                  child: TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: _nameController,
-                      decoration: const InputDecoration(
-                        errorStyle: TextStyle(color: cherry),
-                        labelText: 'Benutzername',
-                        labelStyle: TextStyle(color: inkBright),
-                        hintText: 'Name',
-                        suffixIcon: Icon(
-                          Icons.person,
-                          color: inkBright,
-                        ),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Name benötigt';
-                        }
-                        return null;
-                      }),
-                ),
-                Container(
+                SizedBox(
                   width: 300,
                   child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
@@ -116,9 +94,9 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                   height: 30,
                 ),
                 AdminAuthButtons(
-                    emailController: _emailController,
-                    passwordController: _passwordController,
-                    nameController: _nameController)
+                  emailController: _emailController,
+                  passwordController: _passwordController,
+                )
               ],
             )),
       ),

@@ -15,7 +15,12 @@ class SignInState extends FirebaseAuthState {
     this.errorMessage,
   });
   @override
-  List<Object> get props => [];
+  List<Object> get props => [errorMessage!];
 }
 
-class RegisterState extends FirebaseAuthState {}
+class RegisterState extends FirebaseAuthState {
+  final String? errorMessage;
+  const RegisterState({this.errorMessage});
+  @override
+  List<Object> get props => [errorMessage!];
+}

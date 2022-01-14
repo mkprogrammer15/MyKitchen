@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:profi_neon/src/features/admin_auth/data/models/admin_model.dart';
 
 class AuthDataSource {
   final auth = FirebaseAuth.instance;
+
+  //create user object based on Firebase user
+  AdminModel _userFromFirebaseUser(User? user) =>
+      AdminModel(uid: user!.uid, email: user.email!, name: user.displayName!);
 
   Future registerWithEmailAndPassword(
       {required String name,
@@ -11,9 +17,8 @@ class AuthDataSource {
       final result = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
       final user = result.user;
-      await user!.updateDisplayName(name);
-      return user;
-    } catch (e) {
+      return _userFromFirebaseUser(user);
+    } on FirebaseAuthException catch (e) {
       print(e.toString());
       return null;
     }
@@ -22,17 +27,18 @@ class AuthDataSource {
   Future signInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      final userCredential =
-          auth.signInWithEmailAndPassword(email: email, password: password);
-      print('${auth.currentUser!.email} is logged in');
-      return userCredential;
+      final result = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      final user = result.user;
+      await user!.updateDisplayName(email);
+      print('my uid is ${result.user!.uid}');
+      print('my name is ${result.user!.displayName}');
+      return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print(e.code);
-        return 'No user found for that email.';
-      } else if (e.code == 'wrong-password') {
-        return 'Wrong password provided for that user.';
-      }
+      } else if (e.code == 'wrong-password') {}
+      return 'something went wrong';
     }
   }
 

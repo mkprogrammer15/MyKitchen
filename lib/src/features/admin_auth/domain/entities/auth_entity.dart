@@ -1,13 +1,13 @@
 class AuthEntity {
   String email;
-  String password;
+  // String? password;
   String name;
-  String id;
+  String uid;
 
   AuthEntity({
     required this.email,
-    required this.password,
+    // required this.password,
     required this.name,
-    required this.id,
+    required this.uid,
   });
 }

@@ -8,15 +8,15 @@ class AdminAuthButtons extends StatelessWidget {
     Key? key,
     required TextEditingController emailController,
     required TextEditingController passwordController,
-    required TextEditingController nameController,
+    // required TextEditingController nameController,
   })  : _emailController = emailController,
         _passwordController = passwordController,
-        _nameController = nameController,
+        //   _nameController = nameController,
         super(key: key);
 
   final TextEditingController _emailController;
   final TextEditingController _passwordController;
-  final TextEditingController _nameController;
+//  final TextEditingController _nameController;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,7 @@ class AdminAuthButtons extends StatelessWidget {
         ElevatedButton(
             onPressed: () {
               if (_emailController.text.isNotEmpty &&
-                  _passwordController.text.isNotEmpty &&
-                  _nameController.text.isNotEmpty) {
+                  _passwordController.text.isNotEmpty) {
                 BlocProvider.of<FirebaseAuthBloc>(context).add(
                   SignInEvent(
                       email: _emailController.text,
@@ -45,12 +44,11 @@ class AdminAuthButtons extends StatelessWidget {
         ElevatedButton(
             onPressed: () {
               if (_emailController.text.isNotEmpty &&
-                  _passwordController.text.isNotEmpty &&
-                  _nameController.text.isNotEmpty) {
+                  _passwordController.text.isNotEmpty) {
                 BlocProvider.of<FirebaseAuthBloc>(context).add(RegisterEvent(
                     email: _emailController.text,
                     password: _passwordController.text,
-                    name: _nameController.text));
+                    name: _emailController.text));
                 Navigator.of(context)
                     .pushNamed('admin_after_registration_screen');
               }

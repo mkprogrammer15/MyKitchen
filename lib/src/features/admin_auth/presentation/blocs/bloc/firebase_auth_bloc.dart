@@ -22,14 +22,16 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
     if (event is SignInEvent) {
       String? errorMessage;
       await authRepository.signInWithEmailAndPassword(
-          email: event.email, password: event.password);
+        email: event.email,
+        password: event.password,
+      );
 
       yield SignInState(errorMessage: errorMessage);
     }
 
     if (event is RegisterEvent) {
       await authRepository.registerWithEmailAndPassword(
-          email: event.email, password: event.password, name: '');
+          email: event.email, password: event.password, name: event.email);
     }
 
     if (event is SignOutEvent) {

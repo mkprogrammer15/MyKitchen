@@ -22,7 +22,6 @@ class AdminChatBloc extends Bloc<AdminChatEvent, AdminChatState> {
       final List<ChatEntity> chatData;
       await ChatHelpers.saveChatData(event.message, event.userEmail);
       // chatData = await ChatHelpers.getChatMessages();
-
       yield MessageState();
     }
   }

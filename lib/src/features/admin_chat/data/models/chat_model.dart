@@ -5,13 +5,15 @@ class ChatModel extends ChatEntity {
   ChatModel({
     required String message,
     required String userName,
-  }) : super(message: message, userName: userName);
+    required String time,
+  }) : super(message: message, userName: userName, time: time);
 
   factory ChatModel.fromSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> snap) {
     final chatModel = ChatModel(
       message: snap['text'] as String,
       userName: snap['sender'] as String,
+      time: snap['time'] as String,
     );
     return chatModel;
   }
