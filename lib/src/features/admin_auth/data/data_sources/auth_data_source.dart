@@ -30,10 +30,9 @@ class AuthDataSource {
       final result = await auth.signInWithEmailAndPassword(
           email: email, password: password);
       final user = result.user;
-      await user!.updateDisplayName(email);
-      print('my uid is ${result.user!.uid}');
-      print('my name is ${result.user!.displayName}');
-      return user;
+      final currentUser = _userFromFirebaseUser(user);
+      print('useruid is ${currentUser.uid}');
+      return currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print(e.code);
