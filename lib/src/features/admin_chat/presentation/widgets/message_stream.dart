@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:profi_neon/src/features/admin_auth/data/data_sources/auth_data_source.dart';
+import 'package:profi_neon/src/core/data/data_source/data_source.dart';
 import 'package:profi_neon/src/features/admin_chat/data/chat_helpers.dart';
 import 'package:profi_neon/src/features/admin_chat/presentation/widgets/message_bubble.dart';
 

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
-import 'package:profi_neon/src/features/admin_auth/presentation/blocs/bloc/firebase_auth_bloc.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/pages/admin_login_screen.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/widgets/back_appbar_button.dart';
 
@@ -31,7 +29,7 @@ class AdminAppBar extends StatelessWidget with PreferredSizeWidget {
         actions: [
           IconButton(
             onPressed: () {
-              BlocProvider.of<FirebaseAuthBloc>(context).add(SignOutEvent());
+              //  BlocProvider.of<FirebaseAuthBloc>(context).add(SignOutEvent());
               Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
                   builder: (context) => AdminLoginScreen()));
             },

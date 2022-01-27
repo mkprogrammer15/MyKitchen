@@ -1,4 +1,7 @@
 // ignore: always_use_package_imports
+import 'package:profi_neon/src/features/admin_auth/presentation/blocs/sign_in_bloc.dart';
+
+// ignore: always_use_package_imports
 import 'export.dart';
 
 class App extends StatefulWidget {
@@ -20,9 +23,7 @@ class _AppState extends State<App> {
         BlocProvider<KitchenBloc>(create: (context) => KitchenBloc()),
         BlocProvider<FirebaseCounterBloc>(
             create: (context) => FirebaseCounterBloc()),
-        BlocProvider<FirebaseAuthBloc>(
-            create: (context) =>
-                FirebaseAuthBloc(authRepository: getIt.get<AuthRepository>())),
+        BlocProvider<SignInBloc>(create: (context) => getIt<SignInBloc>()),
         BlocProvider<RequestsBloc>(
             create: (context) => RequestsBloc(
                 requestRepository: getIt.get<RequestRepository>())),

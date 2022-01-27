@@ -8,7 +8,6 @@ export 'package:profi_neon/src/core/presentation/blocs/language_bloc.dart';
 export 'package:profi_neon/src/core/presentation/pages/language_screen.dart';
 export 'package:profi_neon/src/core/style/theme_data.dart';
 export 'package:profi_neon/src/features/admin_auth/domain/repositories/auth_repository.dart';
-export 'package:profi_neon/src/features/admin_auth/presentation/blocs/bloc/firebase_auth_bloc.dart';
 export 'package:profi_neon/src/features/admin_auth/presentation/pages/admin_after_registration_screen.dart';
 export 'package:profi_neon/src/features/admin_auth/presentation/pages/admin_login_screen.dart';
 export 'package:profi_neon/src/features/admin_chat/presentation/blocs/bloc/admin_chat_bloc.dart';
