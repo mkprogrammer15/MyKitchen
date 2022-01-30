@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profi_neon/src/core/data/data_source/data_source.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
+import 'package:profi_neon/src/features/admin_auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:profi_neon/src/features/admin_chat/presentation/blocs/bloc/admin_chat_bloc.dart';
 import 'package:profi_neon/src/features/admin_chat/presentation/widgets/message_stream.dart';
 
@@ -32,7 +33,8 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
             IconButton(
                 icon: const Icon(Icons.close),
                 onPressed: () {
-                  //Implement logout functionality
+                  BlocProvider.of<AuthBloc>(context)
+                      .add(const AuthEvent.signedOut());
                 }),
           ],
           title: const Text('Chat'),

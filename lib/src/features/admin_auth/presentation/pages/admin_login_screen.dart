@@ -33,7 +33,8 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AdminAppBar(
-          onpress: () => Navigator.pushNamed(context, '/'),
+          onpress: () =>
+              Navigator.pushReplacementNamed(context, 'language_screen'),
           info: 'Adminbereich',
           appIcon: const Icon(null),
         ),

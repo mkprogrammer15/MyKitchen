@@ -31,7 +31,7 @@ class AfterRequestScreen extends StatelessWidget {
               onPressed: () {
                 BlocProvider.of<KitchenBloc>(context)
                     .add(SecondKitchenEvent(PartOfKitchen.getList()));
-                Navigator.of(context).pushNamed('/');
+                Navigator.of(context).pushNamed('language_screen');
               },
               style: ElevatedButton.styleFrom(primary: inkDark),
               child: Text(

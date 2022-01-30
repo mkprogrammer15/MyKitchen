@@ -13,6 +13,8 @@ import 'package:profi_neon/src/features/admin_auth/presentation/blocs/auth/auth_
 import 'package:profi_neon/src/features/user_calculation/presentation/pages/client_counter_screen.dart';
 
 class LanguageScreen extends StatelessWidget {
+  static const routeName = 'language_screen';
+
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<FirstScreenUIBloc>(context)
@@ -29,7 +31,8 @@ class LanguageScreen extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, 'check_auth_screen');
+                    Navigator.of(context)
+                        .pushReplacementNamed('admin_login_screen');
                   },
                   icon: const Icon(Icons.person)),
             ]),

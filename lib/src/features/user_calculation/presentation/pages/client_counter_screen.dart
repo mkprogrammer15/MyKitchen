@@ -23,7 +23,7 @@ class _ClientCounterScreenState extends State<ClientCounterScreen> {
         ),
         leading: IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed('/');
+              Navigator.of(context).pushNamed('language_screen');
             },
             icon: const Icon(
               Icons.arrow_back,

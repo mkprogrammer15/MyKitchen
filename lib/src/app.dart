@@ -32,7 +32,7 @@ class _AppState extends State<App> {
         BlocProvider<AdminChatBloc>(create: (context) => AdminChatBloc()),
         BlocProvider<AuthBloc>(
             create: (context) =>
-                getIt<AuthBloc>()..add(const AuthCheckRequested())),
+                getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested())),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
@@ -54,7 +54,8 @@ class _AppState extends State<App> {
             title: 'BuildMyKitchen',
             initialRoute: '/',
             routes: {
-              '/': (context) => LanguageScreen(),
+              '/': (context) => CheckAuthScreen(),
+              LanguageScreen.routeName: (context) => LanguageScreen(),
               ClientCounterScreen.routeName: (context) => ClientCounterScreen(),
               ClientFormScreen.routeName: (context) => ClientFormScreen(),
               AfterRequestScreen.routeName: (context) => AfterRequestScreen(),
@@ -65,7 +66,7 @@ class _AppState extends State<App> {
               AdminAfterRegistrationScreen.routeName: (context) =>
                   AdminAfterRegistrationScreen(),
               AdminChatScreen.nameRoute: (context) => AdminChatScreen(),
-              CheckAuthScreen.routeName: (context) => CheckAuthScreen()
+              // CheckAuthScreen.routeName: (context) => CheckAuthScreen()
             },
           );
         },
