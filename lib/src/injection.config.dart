@@ -9,9 +9,10 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'features/admin_auth/data/data_sources/firebase_injectable_module.dart'
-    as _i11;
+    as _i12;
 import 'features/admin_auth/data/repositories/auth_repository_impl.dart' as _i9;
 import 'features/admin_auth/domain/repositories/auth_repository.dart' as _i8;
+import 'features/admin_auth/presentation/blocs/auth/auth_bloc.dart' as _i11;
 import 'features/admin_auth/presentation/blocs/sign_in_bloc.dart' as _i10;
 import 'features/admin_orders/data/data_sources/request_data_source.dart'
     as _i4;
@@ -38,7 +39,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i8.AuthRepository>(
       () => _i9.AuthRepositoryImpl(get<_i3.FirebaseAuth>()));
   gh.factory<_i10.SignInBloc>(() => _i10.SignInBloc(get<_i8.AuthRepository>()));
+  gh.factory<_i11.AuthBloc>(() => _i11.AuthBloc(get<_i8.AuthRepository>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i11.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i12.FirebaseInjectableModule {}

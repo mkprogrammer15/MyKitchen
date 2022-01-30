@@ -1,4 +1,6 @@
 // ignore: always_use_package_imports
+import 'package:profi_neon/src/core/presentation/pages/check_auth_screen.dart';
+import 'package:profi_neon/src/features/admin_auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/blocs/sign_in_bloc.dart';
 
 // ignore: always_use_package_imports
@@ -28,6 +30,9 @@ class _AppState extends State<App> {
             create: (context) => RequestsBloc(
                 requestRepository: getIt.get<RequestRepository>())),
         BlocProvider<AdminChatBloc>(create: (context) => AdminChatBloc()),
+        BlocProvider<AuthBloc>(
+            create: (context) =>
+                getIt<AuthBloc>()..add(const AuthCheckRequested())),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
@@ -60,6 +65,7 @@ class _AppState extends State<App> {
               AdminAfterRegistrationScreen.routeName: (context) =>
                   AdminAfterRegistrationScreen(),
               AdminChatScreen.nameRoute: (context) => AdminChatScreen(),
+              CheckAuthScreen.routeName: (context) => CheckAuthScreen()
             },
           );
         },

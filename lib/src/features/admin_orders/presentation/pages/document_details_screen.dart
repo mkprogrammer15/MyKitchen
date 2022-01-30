@@ -33,7 +33,9 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
           'Anfrage von ${widget.re!.userName}',
           style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 18),
         ),
-        leading: const BackAppBarButton(),
+        leading: BackAppBarButton(
+          onpress: () => Navigator.pop(context),
+        ),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.scanner))
         ],

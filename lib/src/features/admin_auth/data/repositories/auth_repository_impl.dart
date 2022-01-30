@@ -53,6 +53,8 @@ class AuthRepositoryImpl implements AuthRepository {
       } else {
         return left(const AuthFailure.serverError());
       }
+    } on Object? catch (e) {
+      return left(const AuthFailure.invalidEmailAndPasswordCombination());
     }
   }
 

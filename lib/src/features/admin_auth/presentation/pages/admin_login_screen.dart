@@ -9,7 +9,7 @@ import 'package:profi_neon/src/features/admin_auth/presentation/widgets/admin_ap
 import 'package:profi_neon/src/features/admin_auth/presentation/widgets/admin_auth_buttons.dart';
 
 class AdminLoginScreen extends StatefulWidget {
-  static const routeName = 'admin_screen';
+  static const routeName = 'admin_login_screen';
   @override
   _AdminLoginScreenState createState() => _AdminLoginScreenState();
 }
@@ -33,6 +33,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AdminAppBar(
+          onpress: () => Navigator.pushNamed(context, '/'),
           info: 'Adminbereich',
           appIcon: const Icon(null),
         ),
@@ -52,7 +53,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                                 'Invalid email and password combination'),
                       ).show(context);
                     }, (_) {
-                      //Navigate to Admin if all good
+                      Navigator.pushNamed(context, 'admin_account_screen');
                     }));
           },
           builder: (context, state) {

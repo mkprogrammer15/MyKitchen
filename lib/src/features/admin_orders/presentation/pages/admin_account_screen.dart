@@ -26,6 +26,9 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
     BlocProvider.of<RequestsBloc>(context).add(GetRequestsEvent());
     return Scaffold(
         appBar: AdminAppBar(
+          onpress: () {
+            setState(() {});
+          },
           info: 'Hallo Administrator!',
           appIcon: const Icon(Icons.login_rounded),
         ),

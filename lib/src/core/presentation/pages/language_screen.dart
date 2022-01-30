@@ -9,6 +9,7 @@ import 'package:profi_neon/src/core/presentation/widgets/icon_button_language.da
 import 'package:profi_neon/src/core/presentation/widgets/my_drawer.dart';
 import 'package:profi_neon/src/core/style/background_gradient.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
+import 'package:profi_neon/src/features/admin_auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:profi_neon/src/features/user_calculation/presentation/pages/client_counter_screen.dart';
 
 class LanguageScreen extends StatelessWidget {
@@ -18,22 +19,20 @@ class LanguageScreen extends StatelessWidget {
         .add(BorderIconEvent(langList: LanguageList.langList));
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: inkDark,
-          iconTheme: const IconThemeData(color: corp),
-          centerTitle: true,
-          title: Text(
-            'BuildMyKitchen',
-            style: Theme.of(context).textTheme.headline1,
-          ),
-          actions: [
-            IconButton(
-                color: corp,
-                onPressed: () {
-                  Navigator.pushNamed(context, 'admin_screen');
-                },
-                icon: const Icon(Icons.person)),
-          ],
-        ),
+            backgroundColor: inkDark,
+            iconTheme: const IconThemeData(color: corp),
+            centerTitle: true,
+            title: Text(
+              'BuildMyKitchen',
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'check_auth_screen');
+                  },
+                  icon: const Icon(Icons.person)),
+            ]),
         drawer: MyDrawer(),
         body: BlocBuilder<FirstScreenUIBloc, FirstScreenUIState>(
             builder: (context, state) {

@@ -24,8 +24,6 @@ class AdminAuthButtons extends StatelessWidget {
             onPressed: () {
               BlocProvider.of<SignInBloc>(context)
                   .add(const SignInEvent.signInWithEmailAndPasswordPressed());
-
-              // Navigator.of(context).pushNamed('admin_account_screen');
             },
             style: ElevatedButton.styleFrom(primary: inkDark),
             child: Text('Einloggen',
@@ -37,8 +35,6 @@ class AdminAuthButtons extends StatelessWidget {
             onPressed: () {
               BlocProvider.of<SignInBloc>(context)
                   .add(const SignInEvent.registerWithEmailAndPasswordPressed());
-              // Navigator.of(context)
-              //     .pushNamed('admin_after_registration_screen');
             },
             style: ElevatedButton.styleFrom(primary: inkDark),
             child: Text('Registrieren',
