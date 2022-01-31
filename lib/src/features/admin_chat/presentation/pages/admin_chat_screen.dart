@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profi_neon/src/core/data/data_source/data_source.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:profi_neon/src/features/admin_auth/presentation/widgets/admin_appbar.dart';
 import 'package:profi_neon/src/features/admin_chat/presentation/blocs/bloc/admin_chat_bloc.dart';
 import 'package:profi_neon/src/features/admin_chat/presentation/widgets/message_stream.dart';
 
@@ -27,20 +28,10 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: null,
-          actions: <Widget>[
-            IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () {
-                  BlocProvider.of<AuthBloc>(context)
-                      .add(const AuthEvent.signedOut());
-                }),
-          ],
-          title: const Text('Chat'),
-          centerTitle: true,
-          backgroundColor: inkDark,
-        ),
+        appBar: AdminAppBar(
+            info: 'Chat mit Kollegen',
+            appIcon: const Icon(Icons.login_outlined),
+            onpress: () => Navigator.pop(context)),
         body: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

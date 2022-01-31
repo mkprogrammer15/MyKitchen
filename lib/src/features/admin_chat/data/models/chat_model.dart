@@ -5,7 +5,7 @@ class ChatModel extends ChatEntity {
   ChatModel({
     required String message,
     required String userName,
-    required String time,
+    required DateTime time,
   }) : super(message: message, userName: userName, time: time);
 
   factory ChatModel.fromSnapshot(
@@ -13,7 +13,7 @@ class ChatModel extends ChatEntity {
     final chatModel = ChatModel(
       message: snap['text'] as String,
       userName: snap['sender'] as String,
-      time: snap['time'] as String,
+      time: snap['time'].toDate() as DateTime,
     );
     return chatModel;
   }

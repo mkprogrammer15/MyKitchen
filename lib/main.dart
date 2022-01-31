@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:profi_neon/src/app.dart';
 import 'package:profi_neon/src/injection.dart';
 
+// ignore: avoid_void_async
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureInjection(Environment.prod);

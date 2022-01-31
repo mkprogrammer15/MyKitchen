@@ -5,15 +5,13 @@ import 'package:profi_neon/src/features/admin_chat/domain/chat_entity.dart';
 
 mixin ChatHelpers {
   static final _firebaseFirestore = FirebaseFirestore.instance;
-  static final currentDate = DateTime.now();
-  static final formattedDate =
-      DateFormat('dd-MM-yyyy kk:mm:ss:ms').format(currentDate).toString();
-
+  //static final formattedDate =
+  //  DateFormat('dd-MM-yyyy kk:mm:ss:ms').format(currentDate).toString();
   static Future saveChatData(String messageText, String currentUser) async {
     await _firebaseFirestore.collection('messages').add(<String, dynamic>{
       'text': messageText,
       'sender': currentUser,
-      'time': Timestamp.now().toDate()
+      'time': Timestamp.fromDate(DateTime.now()).toDate(),
     });
   }
 

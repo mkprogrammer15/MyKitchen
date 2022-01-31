@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 abstract class ChatEntity {
   String message;
   String userName;
-  String time;
+  DateTime time;
 
   ChatEntity({
     required this.message,

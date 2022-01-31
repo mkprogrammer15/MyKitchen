@@ -22,7 +22,7 @@ class MessageBubble extends StatelessWidget {
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            '$sender, 9:54',
+            '$sender, $time',
             style: const TextStyle(
               fontSize: 12,
               color: Colors.black54,

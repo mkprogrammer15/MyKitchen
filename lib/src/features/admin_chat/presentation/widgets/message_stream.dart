@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:profi_neon/src/core/data/data_source/data_source.dart';
 import 'package:profi_neon/src/features/admin_chat/data/chat_helpers.dart';
 import 'package:profi_neon/src/features/admin_chat/presentation/widgets/message_bubble.dart';
+import 'package:intl/intl.dart';
 
 class MessagesStream extends StatelessWidget {
   @override
@@ -23,13 +24,17 @@ class MessagesStream extends StatelessWidget {
         for (final message in messages) {
           final messageText = message['text'].toString();
           final messageSender = message['sender'].toString();
-          final time = message['time'].toString();
+          final time = message['time'] as Timestamp;
+          final convertedTime = time.toDate();
+          final formattedDate = DateFormat('dd-MM-yyyy kk:mm:ss')
+              .format(convertedTime)
+              .toString();
 
           final currentUser =
               AuthDataSource().auth.currentUser!.email!.toString();
 
           final messageBubble = MessageBubble(
-            time: time,
+            time: formattedDate,
             sender: messageSender,
             text: messageText,
             isMe: currentUser == messageSender,
