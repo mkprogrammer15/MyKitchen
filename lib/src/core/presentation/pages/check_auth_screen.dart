@@ -58,11 +58,9 @@ class CheckAuthScreen extends StatelessWidget {
         state.map(
           initial: (_) {},
           authenticated: (value) {
-            print('I am authenticated');
             Navigator.of(context).pushReplacementNamed('admin_account_screen');
           },
           unauthenticated: (value) {
-            print('I am not authenticated');
             Navigator.of(context).pushReplacementNamed('language_screen');
           },
         );

@@ -11,16 +11,12 @@ class BackGroundGradient extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
-        colors: [
-          //KitchenColors.apple,
-          limeBright,
-          corp
-        ],
+        colors: [limeBright, corp],
         begin: Alignment.topRight,
         end: Alignment.bottomLeft,
-        stops: const [0.0, 1.0],
+        stops: [0.0, 1.0],
         tileMode: TileMode.clamp,
       )),
       child: child,
