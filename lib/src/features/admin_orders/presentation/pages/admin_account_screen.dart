@@ -38,7 +38,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
             children: [
               Expanded(
                   child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(22),
                 child: GestureDetector(
                   onTap: () =>
                       Navigator.pushNamed(context, 'admin_chat_screen'),

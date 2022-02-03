@@ -37,7 +37,22 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
           onpress: () => Navigator.pop(context),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.scanner))
+          IconButton(
+              onPressed: () {
+                //implementation of invoice maker in pdf
+              },
+              icon: const Icon(
+                Icons.receipt,
+                color: corp,
+              )),
+          IconButton(
+              onPressed: () {
+                //implementation of screen to pdf
+              },
+              icon: const Icon(
+                Icons.scanner,
+                color: corp,
+              ))
         ],
       ),
       body: SingleChildScrollView(
