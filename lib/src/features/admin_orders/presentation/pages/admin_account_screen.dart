@@ -51,6 +51,13 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                   ),
                 ),
               )),
+              const SizedBox(
+                width: 100, //all Sizes better to manage with MediaQuery.of...
+                child: Divider(
+                  thickness: 1,
+                  color: corp,
+                ),
+              ),
               Expanded(
                   flex: 1,
                   child: Padding(
