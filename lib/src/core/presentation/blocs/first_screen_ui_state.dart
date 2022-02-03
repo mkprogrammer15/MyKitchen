@@ -10,8 +10,8 @@ abstract class FirstScreenUIState extends Equatable {
 class LanguageIconInitial extends FirstScreenUIState {}
 
 class BorderIconState extends FirstScreenUIState {
-  List<bool> langList;
-  BorderIconState({
+  final List<bool> langList;
+  const BorderIconState({
     required this.langList,
   });
 
