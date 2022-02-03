@@ -20,8 +20,8 @@ class _AppState extends State<App> {
             create: (context) => LanguageBloc(LanguageState.initial())),
         BlocProvider<FirebaseUserAuthBloc>(
             create: (context) => FirebaseUserAuthBloc()),
-        BlocProvider<FirstScreenUIBloc>(
-            create: (context) => FirstScreenUIBloc()),
+        BlocProvider<ChooseLanguageBloc>(
+            create: (context) => ChooseLanguageBloc()),
         BlocProvider<KitchenBloc>(create: (context) => KitchenBloc()),
         BlocProvider<FirebaseCounterBloc>(
             create: (context) => FirebaseCounterBloc()),

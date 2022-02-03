@@ -3,7 +3,7 @@ export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:profi_neon/src/app_localizations.dart';
 export 'package:profi_neon/src/core/presentation/blocs/firebase_user_auth_bloc.dart';
-export 'package:profi_neon/src/core/presentation/blocs/first_screen_ui_bloc.dart';
+export 'package:profi_neon/src/core/presentation/blocs/choose_language_bloc.dart';
 export 'package:profi_neon/src/core/presentation/blocs/language_bloc.dart';
 export 'package:profi_neon/src/core/presentation/pages/language_screen.dart';
 export 'package:profi_neon/src/core/style/theme_data.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profi_neon/src/app_localizations.dart';
 import 'package:profi_neon/src/core/data/models/languagelist.dart';
 import 'package:profi_neon/src/core/presentation/blocs/firebase_user_auth_bloc.dart';
-import 'package:profi_neon/src/core/presentation/blocs/first_screen_ui_bloc.dart';
+import 'package:profi_neon/src/core/presentation/blocs/choose_language_bloc.dart';
 import 'package:profi_neon/src/core/presentation/blocs/language_bloc.dart';
 import 'package:profi_neon/src/core/presentation/widgets/icon_button_language.dart';
 import 'package:profi_neon/src/core/presentation/widgets/my_drawer.dart';
@@ -17,7 +17,7 @@ class LanguageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<FirstScreenUIBloc>(context)
+    BlocProvider.of<ChooseLanguageBloc>(context)
         .add(BorderIconEvent(langList: LanguageList.langList));
     return Scaffold(
         appBar: AppBar(
@@ -37,7 +37,7 @@ class LanguageScreen extends StatelessWidget {
                   icon: const Icon(Icons.person)),
             ]),
         drawer: MyDrawer(),
-        body: BlocBuilder<FirstScreenUIBloc, FirstScreenUIState>(
+        body: BlocBuilder<ChooseLanguageBloc, ChooseLanguageState>(
             builder: (context, state) {
           if (state is BorderIconState) {
             return BackGroundGradient(
