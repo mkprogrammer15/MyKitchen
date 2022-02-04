@@ -1,5 +1,5 @@
+import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -14,6 +14,9 @@ import 'package:profi_neon/src/features/admin_orders/presentation/widgets/delete
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/details_of_request_document.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/user_contact_details.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DocumentDetailsScreen extends StatefulWidget {
   static const routeName = 'document_details_screen';
@@ -39,6 +42,15 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
     final dynamic result = await ImageGallerySaver.saveImage(bytes, name: name);
     return result['filePath'];
   }
+
+  void showToast() => Fluttertoast.showToast(
+      backgroundColor: corp,
+      msg: 'Image added to Gallery!',
+      fontSize: 24,
+      gravity: ToastGravity.BOTTOM);
+
+  // make image to pdf
+  //make invoice with pdf
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +82,7 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
                   final image = await screenshotController.capture();
                   if (image == null) return;
                   await saveImage(image);
+                  showToast();
                 },
                 icon: const Icon(
                   Icons.scanner,
