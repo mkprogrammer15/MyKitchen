@@ -1,5 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:profi_neon/src/core/style/background_gradient.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
@@ -23,70 +27,68 @@ class DocumentDetailsScreen extends StatefulWidget {
 class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
   // final _passwortToDeleteDocument = TextEditingController();
   final _adminComment = TextEditingController();
+  final screenshotController = ScreenshotController();
+
+  Future saveImage(Uint8List bytes) async {
+    await [Permission.storage].request();
+    final time = DateTime.now()
+        .toIso8601String()
+        .replaceAll('.', '_')
+        .replaceAll(':', '_');
+    final name = 'screenshot_$time';
+    final dynamic result = await ImageGallerySaver.saveImage(bytes, name: name);
+    return result['filePath'];
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: inkDark,
-        centerTitle: true,
-        title: Text(
-          'Anfrage von ${widget.re!.userName}',
-          style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 18),
+    return Screenshot<Image>(
+      controller: screenshotController,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: inkDark,
+          centerTitle: true,
+          title: Text(
+            'Anfrage von ${widget.re!.userName}',
+            style:
+                Theme.of(context).textTheme.headline4!.copyWith(fontSize: 18),
+          ),
+          leading: BackAppBarButton(
+            onpress: () => Navigator.pop(context),
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  //implementation of invoice maker in pdf
+                },
+                icon: const Icon(
+                  Icons.receipt,
+                  color: corp,
+                )),
+            IconButton(
+                onPressed: () async {
+                  final image = await screenshotController.capture();
+                  if (image == null) return;
+                  await saveImage(image);
+                },
+                icon: const Icon(
+                  Icons.scanner,
+                  color: corp,
+                ))
+          ],
         ),
-        leading: BackAppBarButton(
-          onpress: () => Navigator.pop(context),
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                //implementation of invoice maker in pdf
-              },
-              icon: const Icon(
-                Icons.receipt,
-                color: corp,
-              )),
-          IconButton(
-              onPressed: () {
-                //implementation of screen to pdf
-              },
-              icon: const Icon(
-                Icons.scanner,
-                color: corp,
-              ))
-        ],
-      ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: BackGroundGradient(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  child: UserContactDetailsWidget(
-                      widget: widget,
-                      widget1: widget,
-                      widget2: widget,
-                      widget3: widget,
-                      widget4: widget,
-                      widget5: widget,
-                      widget6: widget,
-                      widget7: widget),
-                ),
-                const Divider(),
-                Padding(
-                  padding: const EdgeInsets.all(4),
-                  child: Container(
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: BackGroundGradient(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: ink,
-                        border: Border.all(width: 2, color: pinkyRed),
-                        borderRadius: BorderRadius.circular(30)),
-                    child: DetailsOfRequestDocument(
+                    child: UserContactDetailsWidget(
                         widget: widget,
                         widget1: widget,
                         widget2: widget,
@@ -94,74 +96,94 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
                         widget4: widget,
                         widget5: widget,
                         widget6: widget,
-                        widget7: widget,
-                        widget8: widget,
-                        widget9: widget,
-                        widget10: widget),
+                        widget7: widget),
                   ),
-                ),
-                SizedBox(
-                  height: 200,
-                  width: 450,
-                  child: widget.re!.imageUrl.isNotEmpty
-                      ? PhotoView(
-                          imageProvider:
-                              NetworkImage(widget.re!.imageUrl.toString()))
-                      : null,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                      'Administrator Anmerkung: ${widget.re!.adminComment}'),
-                ),
-                Center(
-                  child: TextFormField(
-                    controller: _adminComment,
-                    decoration: const InputDecoration(
-                        hintText: 'Administratorkommentar'),
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: ink,
+                          border: Border.all(width: 2, color: pinkyRed),
+                          borderRadius: BorderRadius.circular(30)),
+                      child: DetailsOfRequestDocument(
+                          widget: widget,
+                          widget1: widget,
+                          widget2: widget,
+                          widget3: widget,
+                          widget4: widget,
+                          widget5: widget,
+                          widget6: widget,
+                          widget7: widget,
+                          widget8: widget,
+                          widget9: widget,
+                          widget10: widget),
+                    ),
                   ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          BlocProvider.of<RequestsBloc>(context).add(
-                              UpdateCollectionDocumentEvent(
-                                  keyId: widget.re!.documentID,
-                                  adminComment: _adminComment.text));
-                          Navigator.of(context)
-                              .pushNamed('admin_account_screen');
-                        },
-                        style: ElevatedButton.styleFrom(primary: inkDark),
-                        child: Text(
-                          'Anmerkung +',
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                      ),
+                  SizedBox(
+                    height: 200,
+                    width: 450,
+                    child: widget.re!.imageUrl.isNotEmpty
+                        ? PhotoView(
+                            imageProvider:
+                                NetworkImage(widget.re!.imageUrl.toString()))
+                        : null,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                        'Administrator Anmerkung: ${widget.re!.adminComment}'),
+                  ),
+                  Center(
+                    child: TextFormField(
+                      controller: _adminComment,
+                      decoration: const InputDecoration(
+                          hintText: 'Administratorkommentar'),
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: ElevatedButton(
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
                           onPressed: () {
-                            showDialog<void>(
-                                context: context,
-                                builder: (context) {
-                                  return DeleteDocumentAlertDialog(
-                                      widget: widget);
-                                });
+                            BlocProvider.of<RequestsBloc>(context).add(
+                                UpdateCollectionDocumentEvent(
+                                    keyId: widget.re!.documentID,
+                                    adminComment: _adminComment.text));
+                            Navigator.of(context)
+                                .pushNamed('admin_account_screen');
                           },
                           style: ElevatedButton.styleFrom(primary: inkDark),
                           child: Text(
-                            'Anfrage löschen',
+                            'Anmerkung +',
                             style: Theme.of(context).textTheme.headline4,
-                          )),
-                    )
-                  ],
-                ),
-              ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                        child: ElevatedButton(
+                            onPressed: () {
+                              showDialog<void>(
+                                  context: context,
+                                  builder: (context) {
+                                    return DeleteDocumentAlertDialog(
+                                        widget: widget);
+                                  });
+                            },
+                            style: ElevatedButton.styleFrom(primary: inkDark),
+                            child: Text(
+                              'Anfrage löschen',
+                              style: Theme.of(context).textTheme.headline4,
+                            )),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
