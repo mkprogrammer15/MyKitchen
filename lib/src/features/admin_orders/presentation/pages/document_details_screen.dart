@@ -9,6 +9,7 @@ import 'package:profi_neon/src/features/admin_orders/presentation/blocs/bloc/req
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/delete_document_alert_dialog.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/details_of_request_document.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/user_contact_details.dart';
+import 'package:screenshot/screenshot.dart';
 
 class DocumentDetailsScreen extends StatefulWidget {
   static const routeName = 'document_details_screen';
