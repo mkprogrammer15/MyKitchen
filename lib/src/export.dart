@@ -16,7 +16,6 @@ export 'package:profi_neon/src/features/admin_orders/domain/repositories/request
 export 'package:profi_neon/src/features/admin_orders/presentation/blocs/bloc/requests_bloc.dart';
 export 'package:profi_neon/src/features/admin_orders/presentation/pages/admin_account_screen.dart';
 export 'package:profi_neon/src/features/admin_orders/presentation/pages/document_details_screen.dart';
-export 'package:profi_neon/src/features/user_after_request/presentation/after_request_screen.dart';
 export 'package:profi_neon/src/features/user_calculation/presentation/blocs/bloc/firebasecounter_bloc.dart';
 export 'package:profi_neon/src/features/user_calculation/presentation/blocs/bloc/kitchen_bloc.dart';
 export 'package:profi_neon/src/features/user_calculation/presentation/pages/client_counter_screen.dart';

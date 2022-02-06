@@ -6,7 +6,7 @@ import 'package:profi_neon/src/core/style/style_constants.dart';
 import 'package:profi_neon/src/features/user_calculation/data/models/part_of_kitchen.dart';
 import 'package:profi_neon/src/features/user_calculation/presentation/blocs/bloc/kitchen_bloc.dart';
 
-class AfterRequestScreen extends StatelessWidget {
+class UserPostRequest extends StatelessWidget {
   static const routeName = 'after_request_screen';
   @override
   Widget build(BuildContext context) {
