@@ -8,6 +8,7 @@ import 'package:photo_view/photo_view.dart';
 import 'package:profi_neon/src/core/style/background_gradient.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/widgets/back_appbar_button.dart';
+import 'package:profi_neon/src/features/admin_orders/data/data_sources/screenshot_maker.dart';
 import 'package:profi_neon/src/features/admin_orders/domain/entities/request_entity.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/blocs/bloc/requests_bloc.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/delete_document_alert_dialog.dart';
@@ -32,16 +33,16 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
   final _adminComment = TextEditingController();
   final screenshotController = ScreenshotController();
 
-  Future saveImage(Uint8List bytes) async {
-    await [Permission.storage].request();
-    final time = DateTime.now()
-        .toIso8601String()
-        .replaceAll('.', '_')
-        .replaceAll(':', '_');
-    final name = 'screenshot_$time';
-    final dynamic result = await ImageGallerySaver.saveImage(bytes, name: name);
-    return result['filePath'];
-  }
+  // Future saveImage(Uint8List bytes) async {
+  //   await [Permission.storage].request();
+  //   final time = DateTime.now()
+  //       .toIso8601String()
+  //       .replaceAll('.', '_')
+  //       .replaceAll(':', '_');
+  //   final name = 'screenshot_$time';
+  //   final dynamic result = await ImageGallerySaver.saveImage(bytes, name: name);
+  //   return result['filePath'];
+  // }
 
   void showToast() => Fluttertoast.showToast(
       backgroundColor: corp,
@@ -81,7 +82,7 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
                 onPressed: () async {
                   final image = await screenshotController.capture();
                   if (image == null) return;
-                  await saveImage(image);
+                  await ScreenshotMaker.saveImage(image);
                   showToast();
                 },
                 icon: const Icon(
