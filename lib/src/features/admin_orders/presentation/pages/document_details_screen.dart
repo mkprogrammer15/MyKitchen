@@ -33,17 +33,6 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
   final _adminComment = TextEditingController();
   final screenshotController = ScreenshotController();
 
-  // Future saveImage(Uint8List bytes) async {
-  //   await [Permission.storage].request();
-  //   final time = DateTime.now()
-  //       .toIso8601String()
-  //       .replaceAll('.', '_')
-  //       .replaceAll(':', '_');
-  //   final name = 'screenshot_$time';
-  //   final dynamic result = await ImageGallerySaver.saveImage(bytes, name: name);
-  //   return result['filePath'];
-  // }
-
   void showToast() => Fluttertoast.showToast(
       backgroundColor: corp,
       msg: 'Image added to Gallery!',

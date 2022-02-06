@@ -33,44 +33,49 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
             appIcon: const Icon(Icons.login_outlined),
             onpress: () => Navigator.pop(context)),
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                child: MessagesStream(),
-              ),
-              Container(
-                decoration: kMessageContainerDecoration,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: TextField(
-                        controller: messageController,
-                        onChanged: (value) {
-                          messageText = value;
-                        },
-                        decoration: kMessageTextFieldDecoration,
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        BlocProvider.of<AdminChatBloc>(context).add(
-                            MessageEvent(
-                                message: messageText, userEmail: currentUser));
-
-                        messageController.clear();
-                      },
-                      child: const Text(
-                        'Send',
-                        style: kSendButtonTextStyle,
-                      ),
-                    ),
-                  ],
+          child: Container(
+            decoration: const BoxDecoration(color: inkDark),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Expanded(
+                  child: MessagesStream(),
                 ),
-              )
-            ],
+                Container(
+                  decoration: kMessageContainerDecoration,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: TextField(
+                          style: const TextStyle(color: snow),
+                          controller: messageController,
+                          onChanged: (value) {
+                            messageText = value;
+                          },
+                          decoration: kMessageTextFieldDecoration,
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          BlocProvider.of<AdminChatBloc>(context).add(
+                              MessageEvent(
+                                  message: messageText,
+                                  userEmail: currentUser));
+
+                          messageController.clear();
+                        },
+                        child: const Text(
+                          'Send',
+                          style: kSendButtonTextStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ));
   }

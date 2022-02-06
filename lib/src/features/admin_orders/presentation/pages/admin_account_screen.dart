@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
+import 'package:profi_neon/src/features/admin_auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:profi_neon/src/features/admin_auth/presentation/pages/admin_login_screen.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/widgets/admin_appbar.dart';
 import 'package:profi_neon/src/features/admin_orders/domain/entities/request_entity.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/blocs/bloc/requests_bloc.dart';
@@ -27,12 +29,35 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
   Widget build(BuildContext context) {
     BlocProvider.of<RequestsBloc>(context).add(GetRequestsEvent());
     return Scaffold(
-        appBar: AdminAppBar(
-          onpress: () {
-            setState(() {});
-          },
-          info: 'Hallo Administrator!',
-          appIcon: const Icon(Icons.login_rounded),
+        appBar: AppBar(
+          backgroundColor: inkDark,
+          leading: IconButton(
+              onPressed: () =>
+                  Navigator.pushReplacementNamed(context, 'language_screen'),
+              icon: const Icon(
+                Icons.home,
+                color: corp,
+              )),
+          title: Text(
+            'Hallo Administrator',
+            style:
+                Theme.of(context).textTheme.headline4!.copyWith(fontSize: 18),
+          ),
+          centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: () {
+                BlocProvider.of<AuthBloc>(context)
+                    .add(const AuthEvent.signedOut());
+                Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
+                    builder: (context) => AdminLoginScreen()));
+              },
+              icon: const Icon(
+                Icons.login,
+                color: corp,
+              ),
+            )
+          ],
         ),
         body: Container(
           decoration: const BoxDecoration(color: inkDark),

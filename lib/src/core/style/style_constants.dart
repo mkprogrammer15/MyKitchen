@@ -66,6 +66,7 @@ const informationStyle = TextStyle(color: inkDark, fontWeight: FontWeight.bold);
 const kMessageTextFieldDecoration = InputDecoration(
   contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
   hintText: 'Type your message here...',
+  hintStyle: TextStyle(color: snow),
   border: InputBorder.none,
 );
 

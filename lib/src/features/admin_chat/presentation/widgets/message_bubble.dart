@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:profi_neon/src/core/style/style_constants.dart';
 
 class MessageBubble extends StatelessWidget {
   const MessageBubble(
@@ -24,8 +25,8 @@ class MessageBubble extends StatelessWidget {
           Text(
             '$sender, $time',
             style: const TextStyle(
-              fontSize: 12,
-              color: Colors.black54,
+              fontSize: 14,
+              color: snow,
             ),
           ),
           Material(
@@ -40,13 +41,13 @@ class MessageBubble extends StatelessWidget {
                     topRight: Radius.circular(30),
                   ),
             elevation: 5,
-            color: isMe ? Colors.lightBlueAccent : Colors.white,
+            color: isMe ? corp : snow,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Text(
                 text,
                 style: TextStyle(
-                  color: isMe ? Colors.white : Colors.black54,
+                  color: isMe ? snow : Colors.black54,
                   fontSize: 15,
                 ),
               ),
