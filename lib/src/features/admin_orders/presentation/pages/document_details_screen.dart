@@ -1,9 +1,13 @@
 import 'dart:io';
 import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:open_document/open_document.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:photo_view/photo_view.dart';
 import 'package:profi_neon/src/core/style/background_gradient.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
@@ -15,9 +19,6 @@ import 'package:profi_neon/src/features/admin_orders/presentation/widgets/delete
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/details_of_request_document.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/user_contact_details.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:fluttertoast/fluttertoast.dart';
 
 class DocumentDetailsScreen extends StatefulWidget {
   static const routeName = 'document_details_screen';
@@ -40,7 +41,32 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
       gravity: ToastGravity.BOTTOM);
 
   // make image to pdf
-  //make invoice with pdf
+
+  Future<Uint8List> createSomeInv() {
+    final pdf = pw.Document();
+    pdf.addPage(pw.Page(
+      build: (context) {
+        return pw.Center(child: pw.Text('Helllllllo'));
+      },
+    ));
+    return pdf.save();
+  }
+
+  Future<void> savePdfFile(String fileName, Uint8List byteList) async {
+    final output =
+        await getTemporaryDirectory(); //If you not have any specific path
+    final filePath = '${output.path}/$fileName.pdf';
+    final file = File(filePath);
+    await file.writeAsBytes(byteList);
+    try {
+      //await OpenDocument.openDocument(filePath: filePath);
+      await OpenFile.open(filePath);
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  int number = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +86,10 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
           ),
           actions: [
             IconButton(
-                onPressed: () {
-                  //implementation of invoice maker in pdf
+                onPressed: () async {
+                  final data = await createSomeInv();
+                  await savePdfFile('invoice_$number', data);
+                  number++;
                 },
                 icon: const Icon(
                   Icons.receipt,

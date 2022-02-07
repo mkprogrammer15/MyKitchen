@@ -38,6 +38,8 @@ dependencies:
   permission_handler: ^8.3.0
   pdf: ^3.7.1
   fluttertoast: ^8.0.8
+  open_document: ^1.0.4
+  open_file: ^3.2.1
 
   # Firebase
   firebase_auth: ^3.1.0
