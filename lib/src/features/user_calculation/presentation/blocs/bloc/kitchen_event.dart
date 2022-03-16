@@ -10,13 +10,13 @@ abstract class KitchenEvent extends Equatable {
 class ZeroKitchenEvent extends KitchenEvent {
   final List<PartOfKitchen> partsOfKitchenList;
 
-  ZeroKitchenEvent({required this.partsOfKitchenList});
+  const ZeroKitchenEvent({required this.partsOfKitchenList});
 }
 
 class FirstKitchenEvent extends KitchenEvent {
   final List<PartOfKitchen> partsOfKitchenList;
 
-  FirstKitchenEvent({required this.partsOfKitchenList});
+  const FirstKitchenEvent({required this.partsOfKitchenList});
   @override
   List<Object> get props => [partsOfKitchenList];
 }
@@ -24,5 +24,5 @@ class FirstKitchenEvent extends KitchenEvent {
 class SecondKitchenEvent extends KitchenEvent {
   final List<PartOfKitchen> partsOfKitchenList;
 
-  SecondKitchenEvent(this.partsOfKitchenList);
+  const SecondKitchenEvent(this.partsOfKitchenList);
 }

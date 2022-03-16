@@ -43,10 +43,11 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
   // make image to pdf
 
   Future<Uint8List> createSomeInv() {
+    // final dynamic screenshotPath = ScreenshotMaker.imagePath;
     final pdf = pw.Document();
     pdf.addPage(pw.Page(
       build: (context) {
-        return pw.Center(child: pw.Text('Helllllllo'));
+        return pw.Center(child: pw.Container(child: pw.Column(children: [])));
       },
     ));
     return pdf.save();
@@ -59,7 +60,6 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
     final file = File(filePath);
     await file.writeAsBytes(byteList);
     try {
-      //await OpenDocument.openDocument(filePath: filePath);
       await OpenFile.open(filePath);
     } on Exception catch (e) {
       print(e);
@@ -100,6 +100,7 @@ class _DocumentDetailsScreenState extends State<DocumentDetailsScreen> {
                   final image = await screenshotController.capture();
                   if (image == null) return;
                   await ScreenshotMaker.saveImage(image);
+                  await ScreenshotMaker.openImage();
                   showToast();
                 },
                 icon: const Icon(

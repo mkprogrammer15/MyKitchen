@@ -8,10 +8,7 @@ class RequestDataSource {
   final firebaseFirestore = FirebaseFirestore.instance;
 
   Future<List<RequestEntity>> getPosts() async {
-    final qn = await firebaseFirestore
-        .collection('Requests')
-        .orderBy('Anfrage vom')
-        .get();
+    final qn = await firebaseFirestore.collection('Requests').orderBy('Anfrage vom').get();
 
     final data = qn.docs;
 
@@ -28,11 +25,8 @@ class RequestDataSource {
   }
 
   void updateDocumentByAdminComment(String keyId, String adminComment) {
-    var update = Map<String, String>();
+    var update = <String, String>{};
     update = {'Administrator Anmerkung': adminComment};
-    firebaseFirestore
-        .collection('Requests')
-        .doc(keyId)
-        .set(update, SetOptions(merge: true));
+    firebaseFirestore.collection('Requests').doc(keyId).set(update, SetOptions(merge: true));
   }
 }
