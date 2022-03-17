@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profi_neon/src/core/data/contact_details.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/pages/document_details_screen.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/user_data_tile.dart';
@@ -29,23 +30,29 @@ class UserContactDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        UserDataTile(
-          tileName: 'Email',
-          widget: widget,
-          snapshot: widget.re!.email,
-          icon: const Icon(
-            Icons.email,
-            color: corp,
+        GestureDetector(
+          onTap: () => ContactDetails.launchEmail(widget.re!.email),
+          child: UserDataTile(
+            tileName: 'Email',
+            widget: widget,
+            snapshot: widget.re!.email,
+            icon: const Icon(
+              Icons.email,
+              color: corp,
+            ),
           ),
         ),
         const Divider(),
-        UserDataTile(
-          tileName: 'Telefon',
-          snapshot: widget.re!.phone,
-          widget: widget,
-          icon: const Icon(
-            Icons.phone,
-            color: apple,
+        GestureDetector(
+          onTap: () => ContactDetails.launchPhone(widget.re!.phone),
+          child: UserDataTile(
+            tileName: 'Telefon',
+            snapshot: widget.re!.phone,
+            widget: widget,
+            icon: const Icon(
+              Icons.phone,
+              color: apple,
+            ),
           ),
         ),
         const Divider(),
