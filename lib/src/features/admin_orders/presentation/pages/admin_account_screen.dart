@@ -18,11 +18,10 @@ class AdminAccountScreen extends StatefulWidget {
 }
 
 class _AdminAccountScreenState extends State<AdminAccountScreen> {
+  final ScrollController scrollController = ScrollController();
+
   void navigateToDetail(RequestEntity doc) {
-    Navigator.push<void>(
-        context,
-        MaterialPageRoute(
-            builder: (context) => DocumentDetailsScreen(re: doc)));
+    Navigator.push<void>(context, MaterialPageRoute(builder: (context) => DocumentDetailsScreen(re: doc)));
   }
 
   @override
@@ -32,25 +31,31 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
         appBar: AppBar(
           backgroundColor: inkDark,
           leading: IconButton(
-              onPressed: () =>
-                  Navigator.pushReplacementNamed(context, 'language_screen'),
+              onPressed: () => Navigator.pushReplacementNamed(context, 'language_screen'),
               icon: const Icon(
                 Icons.home,
                 color: corp,
               )),
           title: Text(
             'Hallo Administrator',
-            style:
-                Theme.of(context).textTheme.headline4!.copyWith(fontSize: 18),
+            style: Theme.of(context).textTheme.headline4!.copyWith(fontSize: 18),
           ),
           centerTitle: true,
           actions: [
             IconButton(
+                onPressed: () {
+                  setState(() {
+                    scrollController.animateTo(300, duration: const Duration(milliseconds: 5), curve: Curves.easeIn);
+                  });
+                },
+                icon: const Icon(
+                  Icons.refresh,
+                  color: corp,
+                )),
+            IconButton(
               onPressed: () {
-                BlocProvider.of<AuthBloc>(context)
-                    .add(const AuthEvent.signedOut());
-                Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(
-                    builder: (context) => AdminLoginScreen()));
+                BlocProvider.of<AuthBloc>(context).add(const AuthEvent.signedOut());
+                Navigator.of(context).push<dynamic>(MaterialPageRoute<dynamic>(builder: (context) => AdminLoginScreen()));
               },
               icon: const Icon(
                 Icons.login,
@@ -61,22 +66,17 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
         ),
         body: Container(
           decoration: const BoxDecoration(color: inkDark),
-          child: BlocBuilder<RequestsBloc, RequestsState>(
-              builder: (context, state) {
+          child: BlocBuilder<RequestsBloc, RequestsState>(builder: (context, state) {
             if (state is GetRequestsState) {
               return Column(children: [
                 Expanded(
                     child: Padding(
                   padding: const EdgeInsets.all(22),
                   child: GestureDetector(
-                    onTap: () =>
-                        Navigator.pushNamed(context, 'admin_chat_screen'),
+                    onTap: () => Navigator.pushNamed(context, 'admin_chat_screen'),
                     child: Text(
                       'Chat',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline1!
-                          .copyWith(color: cherry),
+                      style: Theme.of(context).textTheme.headline1!.copyWith(color: cherry),
                     ),
                   ),
                 )),
@@ -97,16 +97,12 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                           // const SizedBox(),
                           Text(
                             'Anfragen',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline1!
-                                .copyWith(color: apple),
+                            style: Theme.of(context).textTheme.headline1!.copyWith(color: apple),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
-                          RequestsCounter(
-                              text: state.documentList.length.toString())
+                          RequestsCounter(text: state.documentList.length.toString())
                         ],
                       ),
                     )),
@@ -114,6 +110,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                     flex: 6,
                     child: SafeArea(
                       child: ListView.builder(
+                          controller: scrollController,
                           reverse: true,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
@@ -136,21 +133,12 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                                         color: snow,
                                       ),
                                       onTap: () {
-                                        navigateToDetail(
-                                            state.documentList[index]);
+                                        navigateToDetail(state.documentList[index]);
                                       },
-                                      title: Text(
-                                          state.documentList[index].userName,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline3!
-                                              .copyWith(color: snow)),
+                                      title: Text(state.documentList[index].userName, style: Theme.of(context).textTheme.headline3!.copyWith(color: snow)),
                                       subtitle: Text(
                                         state.documentList[index].requestDate,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline3!
-                                            .copyWith(color: snow),
+                                        style: Theme.of(context).textTheme.headline3!.copyWith(color: snow),
                                       ),
                                     ),
                                   ),
