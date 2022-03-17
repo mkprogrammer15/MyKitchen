@@ -16,26 +16,20 @@ class MyDrawer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                AppLocalization.of(context)!
-                    .getTranslatedValues('Unsere Kontaktdaten'),
-                style: Theme.of(context)
-                    .textTheme
-                    .headline2!
-                    .copyWith(fontSize: 16),
+                AppLocalization.of(context)!.getTranslatedValues('Unsere Kontaktdaten'),
+                style: Theme.of(context).textTheme.headline2!.copyWith(fontSize: 16),
               ),
               getCard(),
-              Container(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/images/kuehlschrank.png'),
-                    Image.asset('assets/images/ofen.png'),
-                    Image.asset('assets/images/schrank.png'),
-                    Image.asset('assets/images/spuelmaschine.png'),
-                    Image.asset('assets/images/waschmaschine.png')
-                  ],
-                ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/images/kuehlschrank.png'),
+                  Image.asset('assets/images/ofen.png'),
+                  Image.asset('assets/images/schrank.png'),
+                  Image.asset('assets/images/spuelmaschine.png'),
+                  Image.asset('assets/images/waschmaschine.png')
+                ],
               ),
             ],
           ),

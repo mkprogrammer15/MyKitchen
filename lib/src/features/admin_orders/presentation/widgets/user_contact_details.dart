@@ -32,8 +32,8 @@ class UserContactDetailsWidget extends StatelessWidget {
         UserDataTile(
           tileName: 'Email',
           widget: widget,
-          snapshot: '${widget.re!.email}',
-          icon: Icon(
+          snapshot: widget.re!.email,
+          icon: const Icon(
             Icons.email,
             color: corp,
           ),
@@ -41,27 +41,27 @@ class UserContactDetailsWidget extends StatelessWidget {
         const Divider(),
         UserDataTile(
           tileName: 'Telefon',
-          snapshot: '${widget.re!.phone}',
+          snapshot: widget.re!.phone,
           widget: widget,
-          icon: Icon(
+          icon: const Icon(
             Icons.phone,
             color: apple,
           ),
         ),
         const Divider(),
         UserDataTile(
-            snapshot: '${widget.re!.address}',
+            snapshot: widget.re!.address,
             widget: widget,
-            icon: Icon(
+            icon: const Icon(
               Icons.home,
               color: lime,
             ),
             tileName: 'Kundenanschrift'),
         const Divider(),
         UserDataTile(
-            snapshot: '${widget.re!.clientComment}',
+            snapshot: widget.re!.clientComment,
             widget: widget,
-            icon: Icon(
+            icon: const Icon(
               Icons.comment,
               color: pale,
             ),
