@@ -37,6 +37,7 @@ const cardEdgeInset1 = EdgeInsets.all(50);
 const drawerPadding1 = EdgeInsets.only(top: 8);
 const informationPadding1 = EdgeInsets.all(8);
 const userCalcPad1 = EdgeInsets.all(4);
+const kPad16 = EdgeInsets.all(16);
 
 // BorderRadius ---------------------------------------------------------------
 
@@ -46,17 +47,12 @@ const informationRad = BorderRadius.all(Radius.circular(8));
 // Shadows --------------------------------------------------------------------
 
 const cardShadow = [
-  BoxShadow(
-      color: Colors.grey,
-      offset: Offset(2, 3),
-      blurRadius: 0.5,
-      spreadRadius: 0.5),
+  BoxShadow(color: Colors.grey, offset: Offset(2, 3), blurRadius: 0.5, spreadRadius: 0.5),
 ];
 
 // BoxDecoration --------------------------------------------------------------
 
-const informationBoxDeco =
-    BoxDecoration(shape: BoxShape.circle, color: appleBright);
+const informationBoxDeco = BoxDecoration(shape: BoxShape.circle, color: appleBright);
 
 // Typo -----------------------------------------------------------------------
 

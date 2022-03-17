@@ -58,6 +58,9 @@ dependencies:
   # System Interfaces
   url_launcher: ^6.0.10
 
+  # Google maps
+  geocode: 1.0.1
+
   # Forms
   flutter_form_builder: ^6.1.0+1
   numberpicker: ^2.1.1

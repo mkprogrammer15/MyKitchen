@@ -3,6 +3,7 @@ import 'package:profi_neon/src/core/data/contact_details.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/pages/document_details_screen.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/user_data_tile.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserContactDetailsWidget extends StatelessWidget {
   const UserContactDetailsWidget({
@@ -56,14 +57,17 @@ class UserContactDetailsWidget extends StatelessWidget {
           ),
         ),
         const Divider(),
-        UserDataTile(
-            snapshot: widget.re!.address,
-            widget: widget,
-            icon: const Icon(
-              Icons.home,
-              color: lime,
-            ),
-            tileName: 'Kundenanschrift'),
+        GestureDetector(
+          onTap: () => ContactDetails.launchMap(widget.re!.address),
+          child: UserDataTile(
+              snapshot: widget.re!.address,
+              widget: widget,
+              icon: const Icon(
+                Icons.home,
+                color: lime,
+              ),
+              tileName: 'Kundenanschrift'),
+        ),
         const Divider(),
         UserDataTile(
             snapshot: widget.re!.clientComment,

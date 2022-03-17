@@ -17,34 +17,21 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<LanguageBloc>(
-            create: (context) => LanguageBloc(LanguageState.initial())),
-        BlocProvider<FirebaseUserAuthBloc>(
-            create: (context) => FirebaseUserAuthBloc()),
-        BlocProvider<ChooseLanguageBloc>(
-            create: (context) => ChooseLanguageBloc()),
+        BlocProvider<LanguageBloc>(create: (context) => LanguageBloc(LanguageState.initial())),
+        BlocProvider<FirebaseUserAuthBloc>(create: (context) => FirebaseUserAuthBloc()),
+        BlocProvider<ChooseLanguageBloc>(create: (context) => ChooseLanguageBloc()),
         BlocProvider<KitchenBloc>(create: (context) => KitchenBloc()),
-        BlocProvider<FirebaseCounterBloc>(
-            create: (context) => FirebaseCounterBloc()),
+        BlocProvider<FirebaseCounterBloc>(create: (context) => FirebaseCounterBloc()),
         BlocProvider<SignInBloc>(create: (context) => getIt<SignInBloc>()),
-        BlocProvider<RequestsBloc>(
-            create: (context) => RequestsBloc(
-                requestRepository: getIt.get<RequestRepository>())),
+        BlocProvider<RequestsBloc>(create: (context) => RequestsBloc(requestRepository: getIt.get<RequestRepository>())),
         BlocProvider<AdminChatBloc>(create: (context) => AdminChatBloc()),
-        BlocProvider<AuthBloc>(
-            create: (context) =>
-                getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested())),
+        BlocProvider<AuthBloc>(create: (context) => getIt<AuthBloc>()..add(const AuthEvent.authCheckRequested())),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           return MaterialApp(
             locale: state.locale,
-            localizationsDelegates: [
-              AppLocalization.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate
-            ],
+            localizationsDelegates: [AppLocalization.delegate, GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, GlobalCupertinoLocalizations.delegate],
             supportedLocales: const [
               Locale('en', 'US'),
               Locale('ru', 'RU'),
@@ -62,10 +49,8 @@ class _AppState extends State<App> {
               UserPostRequest.routeName: (context) => UserPostRequest(),
               AdminLoginScreen.routeName: (context) => AdminLoginScreen(),
               AdminAccountScreen.routeName: (context) => AdminAccountScreen(),
-              DocumentDetailsScreen.routeName: (context) =>
-                  const DocumentDetailsScreen(),
-              AdminAfterRegistrationScreen.routeName: (context) =>
-                  AdminAfterRegistrationScreen(),
+              DocumentDetailsScreen.routeName: (context) => const DocumentDetailsScreen(),
+              AdminAfterRegistrationScreen.routeName: (context) => AdminAfterRegistrationScreen(),
               AdminChatScreen.nameRoute: (context) => AdminChatScreen(),
               // CheckAuthScreen.routeName: (context) => CheckAuthScreen()
             },

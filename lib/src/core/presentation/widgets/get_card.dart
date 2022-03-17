@@ -34,14 +34,14 @@ Container getCard() {
             ),
             onPressed: () {
               print('open Email');
-              ContactDetails.launchURL('m.karp-flat@hotmail.com');
+              ContactDetails.launchEmail('m.karp-flat@hotmail.com');
             }),
         const SizedBox(
           height: 10,
         ),
         ElevatedButton(
           onPressed: () {
-            ContactDetails.customLaunch('tel: 004915785064675');
+            ContactDetails.launchPhone('tel: 004915785064675');
           },
           child: const Text(
             'Tel. : 015785064675',
