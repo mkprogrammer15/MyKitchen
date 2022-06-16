@@ -15,7 +15,7 @@ class AdminChatScreen extends StatefulWidget {
 }
 
 class _AdminChatScreenState extends State<AdminChatScreen> {
-  final fireStore = FirebaseFirestore.instance;
+  //final fireStore = FirebaseFirestore.instance;
   String messageText = '';
   String currentUser = AuthDataSource().auth.currentUser!.email!.toString();
   final messageController = TextEditingController();
@@ -28,10 +28,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AdminAppBar(
-            info: 'Chat mit Kollegen',
-            appIcon: const Icon(Icons.login_outlined),
-            onpress: () => Navigator.pop(context)),
+        appBar: AdminAppBar(info: 'Chat mit Kollegen', appIcon: const Icon(Icons.login_outlined), onpress: () => Navigator.pop(context)),
         body: SafeArea(
           child: Container(
             decoration: const BoxDecoration(color: inkDark),
@@ -59,10 +56,7 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          BlocProvider.of<AdminChatBloc>(context).add(
-                              MessageEvent(
-                                  message: messageText,
-                                  userEmail: currentUser));
+                          BlocProvider.of<AdminChatBloc>(context).add(MessageEvent(message: messageText, userEmail: currentUser));
 
                           messageController.clear();
                         },

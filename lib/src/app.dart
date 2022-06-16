@@ -2,7 +2,7 @@
 import 'package:profi_neon/src/core/presentation/pages/check_auth_screen.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:profi_neon/src/features/admin_auth/presentation/blocs/sign_in_bloc.dart';
-import 'package:profi_neon/src/features/user_post_request/presentation/after_request_screen.dart';
+import 'package:profi_neon/src/features/user_post_request/presentation/user_post_request_screen.dart';
 
 // ignore: always_use_package_imports
 import 'export.dart';

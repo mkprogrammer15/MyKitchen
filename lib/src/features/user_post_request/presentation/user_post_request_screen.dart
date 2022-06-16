@@ -15,13 +15,12 @@ class UserPostRequest extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Text(
-                  AppLocalization.of(context)!.getTranslatedValues(
-                      'Vielen Dank für Ihre Anfrage!\nWir melden uns schnellstmöglich bei Ihnen!'),
+                  AppLocalization.of(context)!.getTranslatedValues('Vielen Dank für Ihre Anfrage!\nWir melden uns schnellstmöglich bei Ihnen!'),
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headline3,
                 ),
@@ -29,8 +28,7 @@ class UserPostRequest extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                BlocProvider.of<KitchenBloc>(context)
-                    .add(SecondKitchenEvent(PartOfKitchen.getList()));
+                BlocProvider.of<KitchenBloc>(context).add(SecondKitchenEvent(PartOfKitchen.getList()));
                 Navigator.of(context).pushNamed('language_screen');
               },
               style: ElevatedButton.styleFrom(primary: inkDark),
