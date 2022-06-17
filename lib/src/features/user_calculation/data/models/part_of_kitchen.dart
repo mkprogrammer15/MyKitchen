@@ -30,51 +30,12 @@ class PartOfKitchen {
       price: 50,
       partSize: 100,
     ),
-    PartOfKitchen(
-        id: 1,
-        colorOfPart: lightBlueGrey,
-        partName: 'Hängeschränke',
-        imagePath: 'assets/images/Backofen.png',
-        isActive: false,
-        price: 50,
-        partSize: 100),
-    PartOfKitchen(
-        id: 2,
-        colorOfPart: lightBlueGrey,
-        partName: 'Waschmaschine',
-        imagePath: 'assets/images/Backofen.png',
-        isActive: false,
-        price: 50,
-        partSize: 100),
-    PartOfKitchen(
-        id: 3,
-        colorOfPart: lightBlueGrey,
-        partName: 'Spülmaschine',
-        imagePath: 'assets/images/Spule.png',
-        isActive: false,
-        price: 50,
-        partSize: 100),
-    PartOfKitchen(
-        id: 4,
-        colorOfPart: lightBlueGrey,
-        partName: 'Arbeitsplatte schneiden',
-        imagePath: 'assets/images/Spule.png',
-        isActive: false,
-        price: 50,
-        partSize: 100),
-    PartOfKitchen(
-        id: 5,
-        colorOfPart: lightBlueGrey,
-        partName: 'Gebrauchte Küche',
-        imagePath: 'assets/images/Spule.png',
-        isActive: false,
-        price: 50,
-        partSize: 100),
+    PartOfKitchen(id: 1, colorOfPart: lightBlueGrey, partName: 'Hängeschränke', imagePath: 'assets/images/Backofen.png', isActive: false, price: 50, partSize: 100),
+    PartOfKitchen(id: 2, colorOfPart: lightBlueGrey, partName: 'Waschmaschine', imagePath: 'assets/images/Backofen.png', isActive: false, price: 50, partSize: 100),
+    PartOfKitchen(id: 3, colorOfPart: lightBlueGrey, partName: 'Spülmaschine', imagePath: 'assets/images/Spule.png', isActive: false, price: 50, partSize: 100),
+    PartOfKitchen(id: 4, colorOfPart: lightBlueGrey, partName: 'Arbeitsplatte schneiden', imagePath: 'assets/images/Spule.png', isActive: false, price: 50, partSize: 100),
+    PartOfKitchen(id: 5, colorOfPart: lightBlueGrey, partName: 'Gebrauchte Küche', imagePath: 'assets/images/Spule.png', isActive: false, price: 50, partSize: 100),
   ];
 
-  // static List<PartOfKitchen> get partsOfKitchenList => _partsOfKitchenList;
-
-  static List<PartOfKitchen> getList() {
-    return _partsOfKitchenList;
-  }
+  static List<PartOfKitchen> getList() => _partsOfKitchenList;
 }

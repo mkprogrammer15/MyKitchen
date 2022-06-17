@@ -14,7 +14,5 @@ mixin ScreenshotMaker {
     return imagePath = result['filePath'];
   }
 
-  static Future openImage() async {
-    await OpenFile.open(imagePath.toString());
-  }
+  static Future openImage() async => await OpenFile.open(imagePath.toString());
 }

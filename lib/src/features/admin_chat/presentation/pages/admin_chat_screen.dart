@@ -57,7 +57,6 @@ class _AdminChatScreenState extends State<AdminChatScreen> {
                       ElevatedButton(
                         onPressed: () {
                           BlocProvider.of<AdminChatBloc>(context).add(MessageEvent(message: messageText, userEmail: currentUser));
-
                           messageController.clear();
                         },
                         child: const Text(
