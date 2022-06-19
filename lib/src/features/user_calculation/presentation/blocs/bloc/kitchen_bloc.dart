@@ -19,7 +19,7 @@ class KitchenBloc extends Bloc<KitchenEvent, KitchenState> {
       partsOfKitchenList = event.partsOfKitchenList;
       yield KitchenMain(partsOfKitchenList!);
     }
-    if (event is FirstKitchenEvent) {
+    if (event is KitchenItemsActivationEvent) {
       partsOfKitchenList = event.partsOfKitchenList;
       yield KitchenMain(partsOfKitchenList!);
     }

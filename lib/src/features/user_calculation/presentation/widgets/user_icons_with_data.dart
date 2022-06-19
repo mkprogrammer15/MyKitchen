@@ -18,8 +18,7 @@ class UserIconsWithData extends StatefulWidget {
 class _UserIconsWithDataState extends State<UserIconsWithData> {
   void onIconTap() {
     setState(() {
-      BlocProvider.of<KitchenBloc>(context)
-          .add(FirstKitchenEvent(partsOfKitchenList: PartOfKitchen.getList()));
+      BlocProvider.of<KitchenBloc>(context).add(KitchenItemsActivationEvent(partsOfKitchenList: PartOfKitchen.getList()));
     });
   }
 
@@ -50,18 +49,12 @@ class _UserIconsWithDataState extends State<UserIconsWithData> {
               if (state is KitchenMain) {
                 return ClientIconButton(
                   onPressed: () {
-                    state.partsOfKitchenList[index].isActive =
-                        !state.partsOfKitchenList[index].isActive;
+                    state.partsOfKitchenList[index].isActive = !state.partsOfKitchenList[index].isActive;
                     onIconTap();
-                    showSnackBar(
-                        context,
-                        AppLocalization.of(context)!.getTranslatedValues(
-                            state.partsOfKitchenList[index].partName));
+                    showSnackBar(context, AppLocalization.of(context)!.getTranslatedValues(state.partsOfKitchenList[index].partName));
                   },
                   iconSize: state.partsOfKitchenList[index].partSize,
-                  iconColor: state.partsOfKitchenList[index].isActive == true
-                      ? blueyGrey
-                      : state.partsOfKitchenList[index].colorOfPart,
+                  iconColor: state.partsOfKitchenList[index].isActive == true ? blueyGrey : state.partsOfKitchenList[index].colorOfPart,
                   iconName: state.partsOfKitchenList[index].partName,
                   id: state.partsOfKitchenList[index].id,
                   imagePath: state.partsOfKitchenList[index].imagePath,
@@ -74,8 +67,7 @@ class _UserIconsWithDataState extends State<UserIconsWithData> {
           ),
         );
       },
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
     );
   }
 }

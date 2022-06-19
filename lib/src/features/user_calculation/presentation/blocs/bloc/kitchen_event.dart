@@ -13,10 +13,10 @@ class InitialKitchenEvent extends KitchenEvent {
   const InitialKitchenEvent({required this.partsOfKitchenList});
 }
 
-class FirstKitchenEvent extends KitchenEvent {
+class KitchenItemsActivationEvent extends KitchenEvent {
   final List<PartOfKitchen> partsOfKitchenList;
 
-  const FirstKitchenEvent({required this.partsOfKitchenList});
+  const KitchenItemsActivationEvent({required this.partsOfKitchenList});
   @override
   List<Object> get props => [partsOfKitchenList];
 }

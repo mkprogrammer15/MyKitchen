@@ -16,12 +16,6 @@ class UserCalculation extends StatefulWidget {
 }
 
 class _UserCalculationState extends State<UserCalculation> {
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<KitchenBloc>(context).add(InitialKitchenEvent(partsOfKitchenList: PartOfKitchen.getList()));
-  }
-
   final _formKey = GlobalKey<FormBuilderState>();
   final TextEditingController _kitchenSizeController = TextEditingController();
 
@@ -32,41 +26,38 @@ class _UserCalculationState extends State<UserCalculation> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(padding: userCalcPad1, child: UserIconsWithData()),
-        // ignore: sized_box_for_whitespace
-        Container(
-          width: 230,
-          child: FormBuilder(
-            key: _formKey,
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            child: InputKitchenSize(kitchenSizeController: _kitchenSizeController),
-          ),
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        ElevatedButton(
-          onPressed: () {
-            if (_formKey.currentState!.validate()) {}
-            setState(() {
-              BlocProvider.of<FirebaseCounterBloc>(context).add(FirstFirebaseEvent(partsOfKitchenList: PartOfKitchen.getList(), kitchenSize: double.parse(_kitchenSizeController.text)));
-            });
-            showDialog<void>(
-                context: context,
-                builder: (context) {
-                  return const CalculationAlertDialog();
+  Widget build(BuildContext context) => BlocBuilder<KitchenBloc, KitchenState>(
+      bloc: BlocProvider.of<KitchenBloc>(context)..add(InitialKitchenEvent(partsOfKitchenList: PartOfKitchen.getList())),
+      builder: (context, state) {
+        return Column(
+          children: [
+            const Padding(padding: userCalcPad1, child: UserIconsWithData()),
+            SizedBox(
+              width: 230,
+              child: FormBuilder(
+                key: _formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                child: InputKitchenSize(kitchenSizeController: _kitchenSizeController),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {}
+                setState(() {
+                  BlocProvider.of<FirebaseCounterBloc>(context).add(FirstFirebaseEvent(partsOfKitchenList: PartOfKitchen.getList(), kitchenSize: double.parse(_kitchenSizeController.text)));
                 });
-          },
-          style: ElevatedButton.styleFrom(primary: inkDark),
-          child: Text(
-            AppLocalization.of(context)!.getTranslatedValues('Berechnen'),
-            style: Theme.of(context).textTheme.headline4,
-          ),
-        ),
-      ],
-    );
-  }
+                showDialog<void>(context: context, builder: (context) => const CalculationAlertDialog());
+              },
+              style: ElevatedButton.styleFrom(primary: inkDark),
+              child: Text(
+                AppLocalization.of(context)!.getTranslatedValues('Berechnen'),
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ),
+          ],
+        );
+      });
 }
