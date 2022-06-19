@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:profi_neon/src/core/data/contact_details.dart';
+import 'package:profi_neon/src/core/contact_details.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/pages/document_details_screen.dart';
 import 'package:profi_neon/src/features/admin_orders/presentation/widgets/user_data_tile.dart';

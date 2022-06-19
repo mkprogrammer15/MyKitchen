@@ -7,10 +7,10 @@ abstract class KitchenEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ZeroKitchenEvent extends KitchenEvent {
+class InitialKitchenEvent extends KitchenEvent {
   final List<PartOfKitchen> partsOfKitchenList;
 
-  const ZeroKitchenEvent({required this.partsOfKitchenList});
+  const InitialKitchenEvent({required this.partsOfKitchenList});
 }
 
 class FirstKitchenEvent extends KitchenEvent {

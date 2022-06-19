@@ -19,8 +19,7 @@ class _UserCalculationState extends State<UserCalculation> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<KitchenBloc>(context)
-        .add(ZeroKitchenEvent(partsOfKitchenList: PartOfKitchen.getList()));
+    BlocProvider.of<KitchenBloc>(context).add(InitialKitchenEvent(partsOfKitchenList: PartOfKitchen.getList()));
   }
 
   final _formKey = GlobalKey<FormBuilderState>();
@@ -43,8 +42,7 @@ class _UserCalculationState extends State<UserCalculation> {
           child: FormBuilder(
             key: _formKey,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            child:
-                InputKitchenSize(kitchenSizeController: _kitchenSizeController),
+            child: InputKitchenSize(kitchenSizeController: _kitchenSizeController),
           ),
         ),
         const SizedBox(
@@ -54,10 +52,7 @@ class _UserCalculationState extends State<UserCalculation> {
           onPressed: () {
             if (_formKey.currentState!.validate()) {}
             setState(() {
-              BlocProvider.of<FirebaseCounterBloc>(context).add(
-                  FirstFirebaseEvent(
-                      partsOfKitchenList: PartOfKitchen.getList(),
-                      kitchenSize: double.parse(_kitchenSizeController.text)));
+              BlocProvider.of<FirebaseCounterBloc>(context).add(FirstFirebaseEvent(partsOfKitchenList: PartOfKitchen.getList(), kitchenSize: double.parse(_kitchenSizeController.text)));
             });
             showDialog<void>(
                 context: context,

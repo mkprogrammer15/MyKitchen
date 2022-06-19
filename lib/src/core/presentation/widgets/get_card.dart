@@ -1,4 +1,4 @@
-import 'package:profi_neon/src/core/data/contact_details.dart';
+import 'package:profi_neon/src/core/contact_details.dart';
 import 'package:profi_neon/src/core/presentation/widgets/get_avatar.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
 import 'package:url_launcher/url_launcher.dart';

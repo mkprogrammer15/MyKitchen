@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profi_neon/src/app_localizations.dart';
-import 'package:profi_neon/src/core/data/models/languagelist.dart';
+import 'package:profi_neon/src/core/languagelist.dart';
 import 'package:profi_neon/src/core/presentation/blocs/firebase_user_auth_bloc.dart';
 import 'package:profi_neon/src/core/presentation/widgets/language_selector.dart';
 import 'package:profi_neon/src/core/presentation/widgets/my_drawer.dart';

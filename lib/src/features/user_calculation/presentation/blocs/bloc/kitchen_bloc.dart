@@ -15,7 +15,7 @@ class KitchenBloc extends Bloc<KitchenEvent, KitchenState> {
   Stream<KitchenState> mapEventToState(
     KitchenEvent event,
   ) async* {
-    if (event is ZeroKitchenEvent) {
+    if (event is InitialKitchenEvent) {
       partsOfKitchenList = event.partsOfKitchenList;
       yield KitchenMain(partsOfKitchenList!);
     }

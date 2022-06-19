@@ -19,7 +19,7 @@ class PartOfKitchen {
     required this.isActive,
     required this.partName,
   });
-
+  //make it dynamically later on (take it from database)
   static List<PartOfKitchen> _partsOfKitchenList = [
     PartOfKitchen(
       id: 0,
