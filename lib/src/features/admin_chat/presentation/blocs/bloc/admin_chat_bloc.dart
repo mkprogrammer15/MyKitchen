@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:profi_neon/src/core/data/data_source/data_source.dart';
+import 'package:profi_neon/src/core/data/data_source/auth_data_source.dart';
 import 'package:profi_neon/src/features/admin_chat/data/chat_helpers.dart';
 import 'package:profi_neon/src/features/admin_chat/domain/chat_entity.dart';
 

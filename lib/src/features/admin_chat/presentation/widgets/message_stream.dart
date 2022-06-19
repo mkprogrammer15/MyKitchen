@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:profi_neon/src/core/data/data_source/data_source.dart';
+import 'package:profi_neon/src/core/data/data_source/auth_data_source.dart';
 import 'package:profi_neon/src/features/admin_chat/data/chat_helpers.dart';
 import 'package:profi_neon/src/features/admin_chat/presentation/widgets/message_bubble.dart';
 import 'package:intl/intl.dart';
@@ -26,12 +26,9 @@ class MessagesStream extends StatelessWidget {
           final messageSender = message['sender'].toString();
           final time = message['time'] as Timestamp;
           final convertedTime = time.toDate();
-          final formattedDate = DateFormat('dd-MM-yyyy kk:mm:ss')
-              .format(convertedTime)
-              .toString();
+          final formattedDate = DateFormat('dd-MM-yyyy kk:mm:ss').format(convertedTime).toString();
 
-          final currentUser =
-              AuthDataSource().auth.currentUser!.email!.toString();
+          final currentUser = AuthDataSource().auth.currentUser!.email!.toString();
 
           final messageBubble = MessageBubble(
             time: formattedDate,

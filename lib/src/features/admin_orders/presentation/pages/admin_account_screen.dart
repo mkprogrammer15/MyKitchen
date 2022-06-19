@@ -18,8 +18,6 @@ class AdminAccountScreen extends StatefulWidget {
 }
 
 class _AdminAccountScreenState extends State<AdminAccountScreen> {
-  final ScrollController scrollController = ScrollController();
-
   void navigateToDetail(RequestEntity doc) {
     Navigator.push<void>(context, MaterialPageRoute(builder: (context) => DocumentDetailsScreen(re: doc)));
   }
@@ -44,9 +42,7 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
           actions: [
             IconButton(
                 onPressed: () {
-                  setState(() {
-                    scrollController.animateTo(300, duration: const Duration(milliseconds: 5), curve: Curves.easeIn);
-                  });
+                  setState(() {});
                 },
                 icon: const Icon(
                   Icons.refresh,
@@ -110,7 +106,6 @@ class _AdminAccountScreenState extends State<AdminAccountScreen> {
                     flex: 6,
                     child: SafeArea(
                       child: ListView.builder(
-                          controller: scrollController,
                           reverse: true,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,

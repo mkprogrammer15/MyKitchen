@@ -19,7 +19,6 @@ class _AppState extends State<App> {
       providers: [
         BlocProvider<LanguageBloc>(create: (context) => LanguageBloc(LanguageState.initial())),
         BlocProvider<FirebaseUserAuthBloc>(create: (context) => FirebaseUserAuthBloc()),
-        BlocProvider<ChooseLanguageBloc>(create: (context) => ChooseLanguageBloc()),
         BlocProvider<KitchenBloc>(create: (context) => KitchenBloc()),
         BlocProvider<FirebaseCounterBloc>(create: (context) => FirebaseCounterBloc()),
         BlocProvider<SignInBloc>(create: (context) => getIt<SignInBloc>()),

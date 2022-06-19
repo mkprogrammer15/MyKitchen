@@ -3,13 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:profi_neon/src/app_localizations.dart';
 import 'package:profi_neon/src/core/data/models/languagelist.dart';
 import 'package:profi_neon/src/core/presentation/blocs/firebase_user_auth_bloc.dart';
-import 'package:profi_neon/src/core/presentation/blocs/choose_language_bloc.dart';
-import 'package:profi_neon/src/core/presentation/blocs/language_bloc.dart';
-import 'package:profi_neon/src/core/presentation/widgets/icon_button_language.dart';
+import 'package:profi_neon/src/core/presentation/widgets/language_selector.dart';
 import 'package:profi_neon/src/core/presentation/widgets/my_drawer.dart';
 import 'package:profi_neon/src/core/style/background_gradient.dart';
 import 'package:profi_neon/src/core/style/style_constants.dart';
-import 'package:profi_neon/src/features/admin_auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:profi_neon/src/features/user_calculation/presentation/pages/client_counter_screen.dart';
 
 class LanguageScreen extends StatelessWidget {
@@ -17,7 +14,7 @@ class LanguageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<ChooseLanguageBloc>(context).add(BorderIconEvent(langList: LanguageList.langList));
+    // BlocProvider.of<ChooseLanguageBloc>(context).add(BorderIconEvent(langList: LanguageList.langList));
     return Scaffold(
         appBar: AppBar(
             backgroundColor: inkDark,
@@ -46,41 +43,46 @@ class LanguageScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const IconButtonLanguage(
-                      index: 0,
-                      currentLanguageSmall: 'de',
-                      currentLanguageBig: 'DE',
-                      language: 'german',
-                      imagepath: 'assets/images/grmnflg.png',
+              ValueListenableBuilder(
+                valueListenable: LanguageList.langList,
+                builder: (context, value, child) {
+                  return Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const LanguageSelector(
+                          index: 0,
+                          currentLanguageSmall: 'de',
+                          currentLanguageBig: 'DE',
+                          language: 'german',
+                          imagepath: 'assets/images/grmnflg.png',
+                        ),
+                        const SizedBox(width: 20),
+                        const LanguageSelector(
+                          index: 1,
+                          currentLanguageSmall: 'en',
+                          currentLanguageBig: 'EN',
+                          language: 'english',
+                          imagepath: 'assets/images/uk.png',
+                        ),
+                        const SizedBox(width: 20),
+                        const LanguageSelector(
+                          index: 2,
+                          currentLanguageSmall: 'ru',
+                          currentLanguageBig: 'RU',
+                          language: 'russian',
+                          imagepath: 'assets/images/rusflg.png',
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 20),
-                    const IconButtonLanguage(
-                      index: 1,
-                      currentLanguageSmall: 'en',
-                      currentLanguageBig: 'EN',
-                      language: 'english',
-                      imagepath: 'assets/images/uk.png',
-                    ),
-                    const SizedBox(width: 20),
-                    const IconButtonLanguage(
-                      index: 2,
-                      currentLanguageSmall: 'ru',
-                      currentLanguageBig: 'RU',
-                      language: 'russian',
-                      imagepath: 'assets/images/rusflg.png',
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
               const SizedBox(
                 height: 30,
               ),
               Container(
-                  child: LanguageList.langList.any((element) => element == true)
+                  child: LanguageList.langList.value.any((element) => element == true)
                       ? ElevatedButton(
                           style: ElevatedButton.styleFrom(primary: inkDark),
                           onPressed: () {

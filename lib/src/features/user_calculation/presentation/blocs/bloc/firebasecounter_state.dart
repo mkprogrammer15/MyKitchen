@@ -12,8 +12,7 @@ class FirebasecounterInitial extends FirebasecounterState {}
 class FirebasePartsCalculatedState extends FirebasecounterState {
   final List<PartOfKitchen> partsOfKitchenList;
   final double kitchenPrice;
-  const FirebasePartsCalculatedState(
-      this.partsOfKitchenList, this.kitchenPrice);
+  const FirebasePartsCalculatedState(this.partsOfKitchenList, this.kitchenPrice);
   @override
   List<Object> get props => [partsOfKitchenList];
 }
@@ -21,8 +20,7 @@ class FirebasePartsCalculatedState extends FirebasecounterState {
 class FirebaseSumUpState extends FirebasecounterState {
   final List<PartOfKitchen> partsOfKitchenList;
   double? totalKitchenPrice;
-  FirebaseSumUpState(
-      {required this.partsOfKitchenList, this.totalKitchenPrice});
+  FirebaseSumUpState({required this.partsOfKitchenList, this.totalKitchenPrice});
   @override
   List<Object> get props => [partsOfKitchenList];
 }
@@ -38,27 +36,8 @@ class DataFirebaseState extends FirebasecounterState {
   String? installationDate;
   String? imageUrl;
 
-  DataFirebaseState(
-      {required this.partOfKitchenList,
-      this.totalKitchenPrice,
-      this.installationDate,
-      this.userAddress,
-      this.userComment,
-      this.userEmail,
-      this.userName,
-      this.userPhone,
-      this.imageUrl});
+  DataFirebaseState({required this.partOfKitchenList, this.totalKitchenPrice, this.installationDate, this.userAddress, this.userComment, this.userEmail, this.userName, this.userPhone, this.imageUrl});
 
   @override
-  List<Object> get props => [
-        partOfKitchenList,
-        totalKitchenPrice!,
-        userAddress!,
-        userComment!,
-        userEmail!,
-        userName!,
-        userPhone!,
-        installationDate!,
-        imageUrl!
-      ];
+  List<Object> get props => [partOfKitchenList, totalKitchenPrice!, userAddress!, userComment!, userEmail!, userName!, userPhone!, installationDate!, imageUrl!];
 }

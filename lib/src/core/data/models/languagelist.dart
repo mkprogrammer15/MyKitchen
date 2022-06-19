@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 mixin LanguageList {
-  static List<bool> langList = [false, false, false];
+  static ValueNotifier<List<bool>> langList = ValueNotifier([false, false, false]);
 
   static List<bool> changeLanguage(int index) {
-    langList = [false, false, false];
-    langList[index] = true;
-    return langList;
+    langList.value = [false, false, false];
+    langList.value[index] = true;
+    return langList.value;
   }
 }
