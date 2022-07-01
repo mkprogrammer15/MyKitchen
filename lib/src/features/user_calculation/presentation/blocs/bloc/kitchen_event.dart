@@ -21,8 +21,8 @@ class KitchenItemsActivationEvent extends KitchenEvent {
   List<Object> get props => [partsOfKitchenList];
 }
 
-class SecondKitchenEvent extends KitchenEvent {
+class KitchenItemsDeactivationEvent extends KitchenEvent {
   final List<PartOfKitchen> partsOfKitchenList;
 
-  const SecondKitchenEvent(this.partsOfKitchenList);
+  const KitchenItemsDeactivationEvent(this.partsOfKitchenList);
 }

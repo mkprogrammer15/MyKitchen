@@ -9,8 +9,7 @@ import 'package:intl/intl.dart';
 part 'firebasecounter_event.dart';
 part 'firebasecounter_state.dart';
 
-class FirebaseCounterBloc
-    extends Bloc<FirebasecounterEvent, FirebasecounterState> {
+class FirebaseCounterBloc extends Bloc<FirebasecounterEvent, FirebasecounterState> {
   FirebaseCounterBloc() : super(FirebasecounterInitial());
 
   List<PartOfKitchen>? partsOfKitchenList;
@@ -25,9 +24,7 @@ class FirebaseCounterBloc
   ) async* {
     if (event is ZeroFirebaseEvent) {
       partsOfKitchenList = event.partsOfKitchenList;
-      yield FirebaseSumUpState(
-          partsOfKitchenList: partsOfKitchenList!,
-          totalKitchenPrice: totalKitchenPrice);
+      yield FirebaseSumUpState(partsOfKitchenList: partsOfKitchenList!, totalKitchenPrice: totalKitchenPrice);
     }
 
     if (event is FirstFirebaseEvent) {
@@ -57,8 +54,7 @@ class FirebaseCounterBloc
       final _partNamesAndStatus = <String, dynamic>{};
       final _totalData = <String, dynamic>{};
 
-      partsOfKitchenList!.forEach((element) =>
-          _partNamesAndStatus[element.partName] = element.isActive);
+      partsOfKitchenList!.forEach((element) => _partNamesAndStatus[element.partName] = element.isActive);
 
       final _userName = event.userName;
       final _installationDate = event.installationDate;
@@ -69,13 +65,9 @@ class FirebaseCounterBloc
       final _imageUrl = event.imageUrl;
 
       final currentDate = DateTime.now();
-      final formattedDate =
-          DateFormat('dd-MM-yyyy kk:mm:ss').format(currentDate).toString();
+      final formattedDate = DateFormat('dd-MM-yyyy kk:mm:ss').format(currentDate).toString();
 
-      final DocumentReference documentReference = await FirebaseFirestore
-          .instance
-          .collection('Requests')
-          .add(<String, String>{'DocID': ''});
+      final DocumentReference documentReference = await FirebaseFirestore.instance.collection('Requests').add(<String, String>{'DocID': ''});
 
       final _docId = documentReference.id;
 
@@ -98,10 +90,7 @@ class FirebaseCounterBloc
         ..addAll(data)
         ..addAll(_partNamesAndStatus);
 
-      await FirebaseFirestore.instance
-          .collection('Requests')
-          .doc(_docId)
-          .set(_totalData);
+      await FirebaseFirestore.instance.collection('Requests').doc(_docId).set(_totalData);
 
       yield DataFirebaseState(
           partOfKitchenList: partsOfKitchenList!,

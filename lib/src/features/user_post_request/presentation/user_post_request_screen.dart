@@ -28,7 +28,7 @@ class UserPostRequest extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                BlocProvider.of<KitchenBloc>(context).add(SecondKitchenEvent(PartOfKitchen.getList()));
+                BlocProvider.of<KitchenBloc>(context).add(KitchenItemsDeactivationEvent(PartOfKitchen.getList()));
                 Navigator.of(context).pushNamed('language_screen');
               },
               style: ElevatedButton.styleFrom(primary: inkDark),
